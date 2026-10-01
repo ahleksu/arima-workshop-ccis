@@ -40,3 +40,6 @@ arima-workshop-ccis-*.zip
 
 # Notebook run outputs
 notebooks/outputs/
+
+# Local agent worktrees
+.claude/worktrees/
