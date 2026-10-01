@@ -128,8 +128,8 @@ The system holds no secrets and no personal data. The main risk is the supply ch
 
 ## Verification
 
-- `python scripts/check_env.py` proves the Python environment (Pending).
-- `jupyter nbconvert --execute` proves that notebooks run (Pending).
-- `npm run build` and a Playwright check prove the web boundary (Pending).
-- A network-off run proves the offline assumption (Pending).
-- A repository scan proves the no-secrets and no-personal-data assumptions (Pending).
+- `python scripts/check_env.py` proves the Python environment (results in `docs/TEST_CASES.md`).
+- `jupyter nbconvert --execute` proves that notebooks run (results in `docs/TEST_CASES.md`).
+- `npm run build` and a Playwright check prove the web boundary (results in `docs/TEST_CASES.md`).
+- A network-off run proves the offline assumption (results in `docs/TEST_CASES.md`).
+- A repository scan proves the no-secrets and no-personal-data assumptions (results in `docs/TEST_CASES.md`).
