@@ -6,9 +6,9 @@ A 60-minute workshop that teaches CCIS faculty to build, check, and use ARIMA fo
 
 The workshop runs on Oct 2, 2026, from 3 PM to 4 PM, at the College of Computing and Information Sciences. The audience has a background in Python and statistics. The material follows five modules: time series fundamentals, autoregressive (AR) and moving average (MA) components, non-seasonal ARIMA, seasonal extensions with exogenous variables, and forecast validation. A synthetic daily electricity demand series grounds each module. See [data/README.md](data/README.md) for how the series is built.
 
-The repository holds seven Jupyter notebooks that run on Google Colab and on a local machine, setup scripts for macOS, Linux, and Windows, and a static web explorer in `web/`. Slides, speaker notes, and take-home guides for dissertation use are planned. A short pricing plan document will describe possible future tiers. The project charges nothing and has no login.
+The repository holds seven Jupyter notebooks that run on Google Colab and on a local machine, setup scripts for macOS, Linux, and Windows, and a static web explorer in `web/`. The slides (`slides/workshop.md`, with PDF and HTML exports) and the run of show (`docs/agenda.md`) are written. Take-home guides for dissertation use are planned. A short pricing plan document will describe possible future tiers. The project charges nothing and has no login.
 
-**Status:** Active development. Notebooks, data, `setup.sh`, and the web explorer exist. Slides and take-home guides are not written yet.
+**Status:** Active development. Notebooks, data, `setup.sh`, the web explorer, and the slides exist. Take-home guides are not written yet.
 
 ## Notebooks
 

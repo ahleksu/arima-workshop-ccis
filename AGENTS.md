@@ -4,7 +4,7 @@
 
 **Project:** ARIMA Workshop for CCIS (`arima-workshop-ccis`)
 
-A 60-minute workshop that teaches CCIS faculty ARIMA time series forecasting in Python. The project delivers slides, seven notebooks that run on Google Colab and locally, setup scripts for macOS, Linux, and Windows, a static web explorer, and take-home guides for dissertation use. Status: active development, with the workshop on Oct 2, 2026, 3 PM to 4 PM. The repository holds notebooks, data, setup scripts, and a web explorer today. Slides and take-home guides are not written yet.
+A 60-minute workshop that teaches CCIS faculty ARIMA time series forecasting in Python. The project delivers slides, seven notebooks that run on Google Colab and locally, setup scripts for macOS, Linux, and Windows, a static web explorer, and take-home guides for dissertation use. Status: active development, with the workshop on Oct 2, 2026, 3 PM to 4 PM. The repository holds notebooks, data, setup scripts, and a web explorer today. Slides exist. Take-home guides are not written yet.
 
 ## Sources of Truth
 
@@ -49,9 +49,11 @@ Also present:
 - `web/`: Vite and TypeScript explorer
 - `setup.sh`, `setup.ps1`, `setup.bat`, `requirements.txt`
 
+- `slides/`: Marp slides with speaker notes, plus PDF and HTML exports
+- `docs/agenda.md`: the timed run of show
+
 Planned and not yet created:
 
-- `slides/`: workshop slides and speaker notes
 - `scripts/package.sh`: builds the Drive zip
 
 ## Setup and Commands
