@@ -9,12 +9,9 @@
 
 ## Development Setup
 
-The setup scripts do not exist yet, so their status is Pending. After they are built, this section will list the exact commands. The planned path is:
-
-1. Run `./setup.sh` (macOS and Linux), `./setup.ps1` (PowerShell), or `setup.bat` (cmd). Each script creates `.venv` and installs `requirements.txt`.
-2. Run `python scripts/check_env.py`.
-3. Run `jupyter lab` to open the notebooks.
-4. For the web explorer, run `npm install` and `npm run build` in `web/`.
+1. Run `./setup.sh` (macOS and Linux). On Windows, run `setup.bat` or `powershell -ExecutionPolicy Bypass -File .\setup.ps1`. Each script creates `.venv`, installs `requirements.txt`, and runs `scripts/check_env.py`. The Windows scripts are not tested on Windows yet.
+2. Run `.venv/bin/jupyter lab` (or `.\.venv\Scripts\jupyter lab` on Windows) to open the notebooks.
+3. For the web explorer, follow `web/README.md`.
 
 ## Issue Workflow
 
@@ -77,11 +74,11 @@ Every PR declares its release impact. Ordinary PRs do not change the canonical p
 
 ## Validation
 
-The validation commands are planned and their status is Pending. Level 1 to Level 3 in `docs/TEST_CASES.md` define them:
+Level 1 to Level 3 in `docs/TEST_CASES.md` define the checks:
 
 1. `python scripts/check_env.py`
-2. `jupyter nbconvert --to notebook --execute` on every notebook in `notebooks/`
-3. `npm run build` in `web/`, then the Playwright check of the demos
+2. `jupyter nbconvert --to notebook --execute --inplace notebooks/0*.ipynb`
+3. `npm ci`, `npm test`, and `npm run build` in `web/`, then the Playwright check of the demos (the Playwright check is not part of the repository yet)
 
 Report the exact command and result. Do not describe a declared command as executed evidence.
 

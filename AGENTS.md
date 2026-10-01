@@ -4,7 +4,7 @@
 
 **Project:** ARIMA Workshop for CCIS (`arima-workshop-ccis`)
 
-A 60-minute workshop that teaches CCIS faculty ARIMA time series forecasting in Python. The project delivers slides, seven notebooks that run on Google Colab and locally, setup scripts for macOS, Linux, and Windows, a static web explorer, and take-home guides for dissertation use. Status: active development, with the workshop on Oct 2, 2026, 3 PM to 4 PM. The repository holds documentation and governance files only today.
+A 60-minute workshop that teaches CCIS faculty ARIMA time series forecasting in Python. The project delivers slides, seven notebooks that run on Google Colab and locally, setup scripts for macOS, Linux, and Windows, a static web explorer, and take-home guides for dissertation use. Status: active development, with the workshop on Oct 2, 2026, 3 PM to 4 PM. The repository holds notebooks, data, setup scripts, and a web explorer today. Slides and take-home guides are not written yet.
 
 ## Sources of Truth
 
@@ -41,18 +41,22 @@ Present today:
 - `docs/`: the five project-context files
 - `.github/`: issue templates and the pull-request template
 
-Planned and not yet created:
+Also present:
 
-- `notebooks/`: seven notebooks, `00` to `06`
-- `data/`: small public CSV files plus `data/README.md` with source and license
-- `scripts/`: `check_env.py` and the packaging script
-- `slides/`: workshop slides and speaker notes
+- `notebooks/`: seven pre-executed notebooks, `00` to `06`
+- `data/`: the synthetic CSV plus `data/README.md` with source and license
+- `scripts/`: `check_env.py` and `make_data.py`
 - `web/`: Vite and TypeScript explorer
 - `setup.sh`, `setup.ps1`, `setup.bat`, `requirements.txt`
 
+Planned and not yet created:
+
+- `slides/`: workshop slides and speaker notes
+- `scripts/package.sh`: builds the Drive zip
+
 ## Setup and Commands
 
-All setup, run, test, and build commands are planned and have Pending status. See `README.md` for the list. Do not document or run a command that does not exist in repository configuration.
+`README.md` lists the commands and their verification status. The web app has its own commands in `web/README.md`. Do not document or run a command that does not exist in repository configuration.
 
 Treat a configured command as declared until it is actually executed. Report the exact command and result.
 

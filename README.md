@@ -4,46 +4,68 @@ A 60-minute workshop that teaches CCIS faculty to build, check, and use ARIMA fo
 
 ## Overview
 
-The workshop runs on Oct 2, 2026, from 3 PM to 4 PM, at the College of Computing and Information Sciences. The audience has a background in Python and statistics. The material follows five modules: time series fundamentals, autoregressive (AR) and moving average (MA) components, non-seasonal ARIMA, seasonal extensions with exogenous variables, and forecast validation. A realistic electricity demand dataset grounds each module.
+The workshop runs on Oct 2, 2026, from 3 PM to 4 PM, at the College of Computing and Information Sciences. The audience has a background in Python and statistics. The material follows five modules: time series fundamentals, autoregressive (AR) and moving average (MA) components, non-seasonal ARIMA, seasonal extensions with exogenous variables, and forecast validation. A synthetic daily electricity demand series grounds each module. See [data/README.md](data/README.md) for how the series is built.
 
-The repository will hold the slides, seven Jupyter notebooks that run on Google Colab and on a local machine, setup scripts for macOS, Linux, and Windows, a static web explorer, and take-home guides for dissertation use. A short pricing plan document describes possible future tiers. The project charges nothing and has no login.
+The repository holds seven Jupyter notebooks that run on Google Colab and on a local machine, setup scripts for macOS, Linux, and Windows, and a static web explorer in `web/`. Slides, speaker notes, and take-home guides for dissertation use are planned. A short pricing plan document will describe possible future tiers. The project charges nothing and has no login.
 
-**Status:** Active development. The repository currently holds documentation and governance files only. Notebooks, scripts, data, slides, and the web app are not built yet.
+**Status:** Active development. Notebooks, data, `setup.sh`, and the web explorer exist. Slides and take-home guides are not written yet.
+
+## Notebooks
+
+Open a notebook on Google Colab with no install:
+
+| Notebook | Topic | Colab |
+| --- | --- | --- |
+| `00_setup_check` | Package versions and a small ARIMA fit | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/00_setup_check.ipynb) |
+| `01_fundamentals_stationarity` | Components, stationarity, ADF test, differencing, Box-Cox | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/01_fundamentals_stationarity.ipynb) |
+| `02_ar_ma_acf_pacf` | Simulate AR and MA, read ACF and PACF | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/02_ar_ma_acf_pacf.ipynb) |
+| `03_arima_energy_demand` | Fit, select, and diagnose a non-seasonal ARIMA | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/03_arima_energy_demand.ipynb) |
+| `04_sarima_exogenous` | Seasonal orders, exogenous drivers, multicollinearity, `pmdarima` | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/04_sarima_exogenous.ipynb) |
+| `05_forecasting_validation` | Intervals, metrics, rolling backtest, breaks, outliers, pipeline | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/05_forecasting_validation.ipynb) |
+| `06_your_data_template` | The whole workflow on your own CSV | [Open](https://colab.research.google.com/github/ahleksu/arima-workshop-ccis/blob/main/notebooks/06_your_data_template.ipynb) |
+
+The notebooks in the repository already contain their outputs, so you can read them without running anything.
 
 ## Requirements
 
-Planned requirements, not yet verified on a built project:
-
-- Python 3.10 to 3.13 for the notebooks and scripts
-- Node.js, current LTS release, for the web explorer in `web/`
-- A web browser and a Google account for the Google Colab path
+- Python 3.10 to 3.13 for the notebooks and scripts. The tested version is Python 3.12 on macOS.
+- Node.js, current LTS release, for the web explorer in `web/`.
+- A web browser and a Google account for the Google Colab path.
 
 ## Quick Start
 
-The setup scripts do not exist yet. Pending: this section will list the exact commands after the scripts are built and tested.
+On Google Colab, open a notebook from the table above and run all cells. The first cell installs what is missing and the notebook downloads its data from this repository.
+
+On your own machine:
+
+1. Clone the repository: `git clone https://github.com/ahleksu/arima-workshop-ccis.git` and move into the folder.
+2. Run the setup script for your system (see Commands).
+3. Start JupyterLab with `.venv/bin/jupyter lab` (macOS and Linux) or `.\.venv\Scripts\jupyter lab` (Windows).
 
 ## Commands
 
-All commands below are planned and not yet available. Their status is Pending.
+| Command | Purpose | Status |
+| --- | --- | --- |
+| `./setup.sh` | Create `.venv`, install packages, register the Jupyter kernel, run the check (macOS and Linux, bash and zsh) | Verified on macOS, Python 3.12.12, 57 seconds |
+| `powershell -ExecutionPolicy Bypass -File .\setup.ps1` | The same steps in Windows PowerShell | Not tested on Windows |
+| `setup.bat` | Starts `setup.ps1` from Windows cmd | Not tested on Windows |
+| `python scripts/check_env.py` | Print package versions, fit a small ARIMA model, read the data file | Verified |
+| `python scripts/make_data.py` | Regenerate `data/energy_demand_daily.csv` | Verified |
+| `jupyter nbconvert --to notebook --execute --inplace notebooks/0*.ipynb` | Run every notebook and refresh the outputs | Verified, 135 seconds |
 
-| Command | Purpose |
-| --- | --- |
-| `./setup.sh` | Create a virtual environment and install dependencies on macOS and Linux |
-| `./setup.ps1` | Create a virtual environment and install dependencies in Windows PowerShell |
-| `setup.bat` | Create a virtual environment and install dependencies in Windows cmd |
-| `python scripts/check_env.py` | Print package versions and run a small ARIMA fit |
-| `jupyter lab` | Open the notebooks locally |
-| `npm run build` | Build the web explorer in `web/` |
+The web explorer has its own commands. See [web/README.md](web/README.md).
+
+If a setup script fails, it prints the failing step. Use the Google Colab path in that case.
 
 ## Configuration
 
 Copy `.env.example` to the project's local environment file and provide values from approved secret and configuration sources. Never commit credentials.
 
-The project needs no secrets today. `.env.example` lists the optional names for data paths and the web base path.
+The project needs no secrets today. `.env.example` lists the optional names for the data path and the web base path.
 
 ## Verification
 
-All verification commands are planned and not yet available. See `docs/TEST_CASES.md` for the four test levels and their Pending status.
+The four test levels and their results are in `docs/TEST_CASES.md`. Run the smallest check first: `python scripts/check_env.py`.
 
 ## Project Context
 
