@@ -56,10 +56,10 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | Requirement | Test cases | Coverage status |
 | --- | --- | --- |
 | PRD-FR-001 | TC-010 | Pending |
-| PRD-FR-002 | TC-006, TC-007 | Pending |
+| PRD-FR-002 | TC-006, TC-007 | Partial (TC-006 Pass, TC-007 Pending) |
 | PRD-FR-003 | TC-006, TC-008 | Pending |
 | PRD-FR-004 | TC-001, TC-003, TC-004, TC-005 | Pending |
-| PRD-FR-005 | TC-002 | Pending |
+| PRD-FR-005 | TC-002 | Pass |
 | PRD-FR-006 | TC-015 | Pending |
 | PRD-FR-007 | TC-009 | Pending |
 | PRD-FR-008 | TC-009 | Pending |
@@ -67,14 +67,14 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | PRD-FR-010 | TC-014 | Pending |
 | PRD-FR-011 | TC-017 | Pending |
 | PRD-NFR-001 | TC-011 | Pending |
-| PRD-NFR-002 | TC-001 | Pending |
+| PRD-NFR-002 | TC-001 | Pass |
 | PRD-NFR-003 | TC-007 | Pending |
 | PRD-NFR-004 | TC-009 | Pending |
 | PRD-NFR-005 | TC-012 | Pending |
 | PRD-NFR-006 | TC-013, TC-015 | Pending |
 | SEC-REQ-001 | TC-018 | Pending |
 | SEC-REQ-002 | TC-013 | Pending |
-| SEC-REQ-003 | TC-003 | Pending |
+| SEC-REQ-003 | TC-003 | Pass |
 | SEC-REQ-004 | TC-019 | Pending |
 | SEC-REQ-005 | TC-015 | Pending |
 | SEC-REQ-006 | TC-017 | Pending |
@@ -83,12 +83,12 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 
 | ID | Test Case Description | Pre Condition | Test Case Procedure | Expected Output | Test Data | Test Date | Result | Note |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| TC-001 | Verify that `setup.sh` creates a working environment on macOS in under 10 minutes | Fresh clone, supported Python installed | 1. Run `./setup.sh`<br>2. Note elapsed time | 1. `.venv` exists and the script prints `jupyter lab` as the next command<br>2. Time is under 10 minutes | `requirements.txt` |  | Pending |  |
-| TC-002 | Verify that `check_env.py` passes on a good install and fails on a broken one | TC-001 passed | 1. Run `python scripts/check_env.py`<br>2. Uninstall `statsmodels`, run it again | 1. Exit code 0 and versions printed<br>2. Non-zero exit code and a clear message | Built-in series |  | Pending |  |
-| TC-003 | Verify that `setup.sh` passes `shellcheck` and uses only allowed commands | `setup.sh` exists | 1. Run `shellcheck setup.sh`<br>2. Search for `curl` and `wget` | 1. No errors<br>2. No unpinned download | `setup.sh` |  | Pending |  |
+| TC-001 | Verify that `setup.sh` creates a working environment on macOS in under 10 minutes | Fresh clone, supported Python installed | 1. Run `./setup.sh`<br>2. Note elapsed time | 1. `.venv` exists and the script prints `jupyter lab` as the next command<br>2. Time is under 10 minutes | `requirements.txt` | 2026-10-01 | Pass | macOS, Python 3.12.12, fresh copy in a temp folder: 57 s, exit 0, printed the `jupyter lab` command |
+| TC-002 | Verify that `check_env.py` passes on a good install and fails on a broken one | TC-001 passed | 1. Run `python scripts/check_env.py`<br>2. Uninstall `statsmodels`, run it again | 1. Exit code 0 and versions printed<br>2. Non-zero exit code and a clear message | Built-in series | 2026-10-01 | Pass | Good install: exit 0. After `pip uninstall statsmodels`: exit 1 with `FAIL: cannot import statsmodels` |
+| TC-003 | Verify that `setup.sh` passes `shellcheck` and uses only allowed commands | `setup.sh` exists | 1. Run `shellcheck setup.sh`<br>2. Search for `curl` and `wget` | 1. No errors<br>2. No unpinned download | `setup.sh` | 2026-10-01 | Pass | `uvx --from shellcheck-py shellcheck setup.sh`: no findings. `grep` for curl, wget, Invoke-WebRequest, iex: no match in the three scripts |
 | TC-004 | Verify that `setup.ps1` creates a working environment on Windows PowerShell | Windows machine | 1. Run `./setup.ps1`<br>2. Run `python scripts/check_env.py` | 1. `.venv` exists<br>2. Exit code 0 | `requirements.txt` |  | Pending | No Windows machine on the presenter side |
 | TC-005 | Verify that `setup.bat` creates a working environment in Windows cmd | Windows machine | 1. Run `setup.bat`<br>2. Run `python scripts/check_env.py` | 1. `.venv` exists<br>2. Exit code 0 | `requirements.txt` |  | Pending | No Windows machine on the presenter side |
-| TC-006 | Verify that every notebook runs without errors | Level 1 passed | 1. Run `jupyter nbconvert --to notebook --execute` on notebooks `00` to `06` | 1. Each command exits with code 0 | Bundled data |  | Pending |  |
+| TC-006 | Verify that every notebook runs without errors | Level 1 passed | 1. Run `jupyter nbconvert --to notebook --execute` on notebooks `00` to `06` | 1. Each command exits with code 0 | Bundled data | 2026-10-01 | Pass | `jupyter nbconvert --to notebook --execute --inplace` on notebooks 00 to 06 (Python 3.12.12, statsmodels 0.15.0, pandas 2.3.3): 7 of 7, 0 errors, 135 s |
 | TC-007 | Verify that notebook results are reproducible | TC-006 passed | 1. Run notebook `03` twice<br>2. Compare printed AIC and forecast values | 1. Both runs complete<br>2. Values match | Fixed seeds |  | Pending |  |
 | TC-008 | Verify that the Colab badge opens notebooks `01` and `03` and they run | Repository public on GitHub | 1. Click the Colab badge for `01` and run all<br>2. Repeat for `03` | 1. Notebook opens<br>2. Run completes without errors | Bundled data |  | Pending |  |
 | TC-009 | Verify that the web demos respond to input | `npm run build` passed | 1. Open the built site<br>2. Move the AR coefficient slider<br>3. Change p, d, q in the playground | 1. Page loads<br>2. Chart and ACF redraw<br>3. Forecast and interval redraw | Bundled series |  | Pending |  |
@@ -105,7 +105,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 
 ## Execution Summary
 
-Executed: 0. Passed: 0. Failed: 0. Conditional Pass: 0. Blocked: 0. Pending: 19.
+Executed: 4. Passed: 4 (TC-001, TC-002, TC-003, TC-006). Failed: 0. Conditional Pass: 0. Blocked: 0. Pending: 15.
 
 ## Known Coverage Exclusions
 
