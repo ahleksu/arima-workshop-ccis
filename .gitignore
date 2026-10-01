@@ -1,0 +1,39 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+.venv/
+venv/
+node_modules/
+
+# Build output
+web/dist/
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.pyc
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+playwright-report/
+test-results/
+
+# Logs and temporary files
+*.log
+.ipynb_checkpoints/
+.cache/
+*.tmp
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Distribution archives
+arima-workshop-ccis-*.zip
