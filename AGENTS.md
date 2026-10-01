@@ -60,7 +60,7 @@ Treat a configured command as declared until it is actually executed. Report the
 
 - Notebooks depend only on `data/` and `requirements.txt`.
 - The web app depends only on its own bundled JSON files, which a script exports from the notebooks.
-- No component calls a network service at runtime. Notebooks fall back to `statsmodels.datasets` when a data file is missing.
+- No component calls a network service at runtime. Two documented exceptions exist: on Colab, `load_energy()` downloads the CSV from the raw GitHub URL when no local copy exists, and notebook 03 has an optional `USE_OPSD` cell that is off by default.
 - The project has no backend, no login, no payment code, and no stored personal data.
 - Setup scripts must fail loudly and print the next command to run.
 

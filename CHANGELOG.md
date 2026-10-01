@@ -9,6 +9,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 ### Added
 
 - Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
+- Seven pre-executed notebooks for Colab and local use: setup check, stationarity, AR and MA, ARIMA, SARIMA with exogenous variables, forecast validation, and a template for your own data (#2, #3, #4, #5, #6, #7, #8)
 
 ### Changed
 

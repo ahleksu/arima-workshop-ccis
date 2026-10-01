@@ -30,4 +30,4 @@ Citation: Open Power System Data. 2020. Data Package Time series. Version 2020-1
 
 ## Built-in datasets
 
-Some notebooks load series from `statsmodels.datasets` (for example `co2` and `sunspots`). These ship with the `statsmodels` package.
+The notebooks do not use `statsmodels.datasets` today. Use them for your own practice, for example `co2` and `sunspots`, which ship with the `statsmodels` package.

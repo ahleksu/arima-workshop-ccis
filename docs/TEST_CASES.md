@@ -37,7 +37,7 @@ Performance and load testing do not apply. Accessibility has a manual contrast c
 
 ## Test Data
 
-Tests use the public CSV files in `data/` and `statsmodels.datasets` fallbacks. The XSS test uses a harmless string that shows an alert only if the app is vulnerable, so run it with the browser console open. No test uses personal data. Test output stays in the scratchpad or in ignored paths and is deleted after use.
+Tests use the public CSV files in `data/`. The XSS test uses a harmless string that shows an alert only if the app is vulnerable, so run it with the browser console open. No test uses personal data. Test output stays in the scratchpad or in ignored paths and is deleted after use.
 
 ## Entry Criteria
 
