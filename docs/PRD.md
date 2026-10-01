@@ -68,7 +68,7 @@ CCIS faculty know Python and statistics, but many have not applied ARIMA to a re
 
 **Degraded venue Wi-Fi.** The presenter uses pre-executed notebooks and the PDF slides. The data files are bundled, so no step needs the network.
 
-**Missing data file.** A notebook that cannot find its CSV loads a `statsmodels.datasets` series and prints a message that names the substitution.
+**Missing local data file.** On Colab, the notebook has no local copy of the CSV, so `load_energy()` downloads it from the raw GitHub URL. If the download fails, the cell stops with a clear error message and the attendee reruns it after the network returns.
 
 ## Functional Requirements
 

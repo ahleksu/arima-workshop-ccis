@@ -95,7 +95,7 @@ The project exposes no network API. The interfaces are files: CSV inputs, `requi
 
 - No supported Python found: the script prints which versions it looked for and the download link, then exits non-zero.
 - Package install fails: the script prints the failing package, keeps `.venv`, and tells the attendee to use Colab.
-- Data file missing: the notebook loads a `statsmodels.datasets` series and prints the substitution.
+- Local data file missing: `load_energy()` downloads the CSV from the raw GitHub URL (the Colab path). If the download fails, the cell stops with a clear error and the attendee reruns it later.
 - Colab session resets: the attendee reruns the first cell.
 - Web JSON has an unknown `schema_version`: the app shows a message and keeps the other demos working.
 

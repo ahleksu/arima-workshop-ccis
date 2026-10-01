@@ -50,7 +50,7 @@ The system delivers a 60-minute ARIMA forecasting workshop for CCIS faculty. It 
 
 ## Failure and Recovery Rules
 
-- Missing data file: fall back to a `statsmodels.datasets` series and print the substitution.
+- Missing local data file: `load_energy()` downloads the CSV from the raw GitHub URL (the Colab path). If that fails, the cell stops with a clear error.
 - Failed package install: keep `.venv`, print the failing package, and point to Colab.
 - Bad web JSON: show a message and keep other demos working.
 - Rollback of the site: revert the commit and let the workflow redeploy.

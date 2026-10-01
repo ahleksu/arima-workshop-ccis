@@ -37,3 +37,6 @@ Thumbs.db
 
 # Distribution archives
 arima-workshop-ccis-*.zip
+
+# Notebook run outputs
+notebooks/outputs/
