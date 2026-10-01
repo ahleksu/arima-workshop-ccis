@@ -60,15 +60,15 @@ CCIS faculty know Python and statistics, but many have not applied ARIMA to a re
 
 ## User Journeys
 
-**Attendee in the room.** The attendee opens the repository link, clicks a Colab badge, and runs notebook `00`. The attendee follows the presenter through notebooks `01`, `03`, and `05`. The attendee tries the web explorer demos on a phone or laptop.
+Attendee in the room. The attendee opens the repository link, clicks a Colab badge, and runs notebook `00`. The attendee follows the presenter through notebooks `01`, `03`, and `05`. The attendee tries the web explorer demos on a phone or laptop.
 
-**Attendee at home, local install.** The attendee runs the setup script for their operating system, runs `check_env.py`, and opens JupyterLab. If a package fails to install, the script prints the failing step and the next command to try, and the attendee uses Colab instead.
+Attendee at home, local install. The attendee runs the setup script for their operating system, runs `check_env.py`, and opens JupyterLab. If a package fails to install, the script prints the failing step and the next command to try, and the attendee uses Colab instead.
 
-**Attendee with own data.** The attendee opens notebook `06`, replaces the sample series with their own CSV, and follows the data-fit checklist. If the series is too short or has structural breaks, the checklist tells the attendee to stop and pick another method.
+Attendee with own data. The attendee opens notebook `06`, replaces the sample series with their own CSV, and follows the data-fit checklist. If the series is too short or has structural breaks, the checklist tells the attendee to stop and pick another method.
 
-**Degraded venue Wi-Fi.** The presenter uses pre-executed notebooks and the PDF slides. The data files are bundled, so no step needs the network.
+Degraded venue Wi-Fi. The presenter uses pre-executed notebooks and the PDF slides. The data files are bundled, so no step needs the network.
 
-**Missing local data file.** On Colab, the notebook has no local copy of the CSV, so `load_energy()` downloads it from the raw GitHub URL. If the download fails, the cell stops with a clear error message and the attendee reruns it after the network returns.
+Missing local data file. On Colab, the notebook has no local copy of the CSV, so `load_energy()` downloads it from the raw GitHub URL. If the download fails, the cell stops with a clear error message and the attendee reruns it after the network returns.
 
 ## Functional Requirements
 
