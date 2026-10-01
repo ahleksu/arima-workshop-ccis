@@ -45,7 +45,7 @@ Also present:
 
 - `notebooks/`: seven pre-executed notebooks, `00` to `06`
 - `data/`: the synthetic CSV plus `data/README.md` with source and license
-- `scripts/`: `check_env.py` and `make_data.py`
+- `scripts/`: `check_env.py`, `make_data.py`, and `package.sh` (builds the Drive zip)
 - `web/`: Vite and TypeScript explorer
 - `setup.sh`, `setup.ps1`, `setup.bat`, `requirements.txt`
 
@@ -54,9 +54,6 @@ Also present:
 - `docs/dissertation-playbook.md`, `docs/data-checklist.md`, `docs/resources.md`: take-home guides
 - `docs/pricing-plan.md`: ideas only, nothing is implemented
 
-Planned and not yet created:
-
-- `scripts/package.sh`: builds the Drive zip
 
 ## Setup and Commands
 

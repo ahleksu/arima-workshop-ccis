@@ -65,7 +65,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | PRD-FR-008 | TC-009 | Pending |
 | PRD-FR-009 | TC-016 | Pending |
 | PRD-FR-010 | TC-014 | Pending |
-| PRD-FR-011 | TC-017 | Pending |
+| PRD-FR-011 | TC-017 | Pass |
 | PRD-NFR-001 | TC-011 | Pending |
 | PRD-NFR-002 | TC-001 | Pass |
 | PRD-NFR-003 | TC-007 | Pending |
@@ -77,7 +77,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | SEC-REQ-003 | TC-003 | Pass |
 | SEC-REQ-004 | TC-019 | Pending |
 | SEC-REQ-005 | TC-015 | Pending |
-| SEC-REQ-006 | TC-017 | Pending |
+| SEC-REQ-006 | TC-017 | Partial (hash printed, Drive sharing not done) |
 
 ## Test Cases
 
@@ -99,13 +99,13 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | TC-014 | Verify that the repository has no payment or login code | Repository has code | 1. Search for `stripe`, `checkout`, `login`, `auth` | 1. No match in code | Repository |  | Pending |  |
 | TC-015 | Verify that every data file is documented and has no personal data | `data/` exists | 1. Compare file list with `data/README.md`<br>2. Inspect column names | 1. Every file has source and license<br>2. No personal field | `data/` |  | Pending |  |
 | TC-016 | Verify that the playbook and checklist exist and are linked | Docs written | 1. Open `README.md`<br>2. Follow each link | 1. Links resolve to existing files | `README.md` |  | Pending |  |
-| TC-017 | Verify that the zip package has the expected content and a hash | `scripts/package.sh` exists | 1. Run the script<br>2. List the zip<br>3. Compute SHA-256 | 1. Zip created<br>2. Notebooks, data, scripts, slides, docs present, and `.venv` and `node_modules` absent<br>3. Hash printed | Repository |  | Pending |  |
+| TC-017 | Verify that the zip package has the expected content and a hash | `scripts/package.sh` exists | 1. Run the script<br>2. List the zip<br>3. Compute SHA-256 | 1. Zip created<br>2. Notebooks, data, scripts, slides, docs present, and `.venv` and `node_modules` absent<br>3. Hash printed | Repository | 2026-10-01 | Pass | `scripts/package.sh`: 93 entries, 3.5 MB. Contains notebooks, data, scripts, slides, docs, web. No `.venv`, `node_modules`, or `.env`. Prints SHA-256. Refuses to run on a dirty tree. `shellcheck` clean. Drive sharing as view-only is a manual step and is not done |
 | TC-018 | Verify that dependency files pin version ranges and the web build uses the lockfile | Files exist | 1. Read `requirements.txt` and `web/package.json`<br>2. Run `npm ci` | 1. Every package has a range<br>2. Install succeeds | Dependency files |  | Pending |  |
 | TC-019 | Verify that the web app treats user input as text | Built site | 1. Enter `<img src=x onerror=alert(1)>` in every text input | 1. No alert appears and the text shows literally | Test string |  | Pending |  |
 
 ## Execution Summary
 
-Executed: 4. Passed: 4 (TC-001, TC-002, TC-003, TC-006). Failed: 0. Conditional Pass: 0. Blocked: 0. Pending: 15.
+Executed: 5. Passed: 5 (TC-001, TC-002, TC-003, TC-006, TC-017). Failed: 0. Conditional Pass: 0. Blocked: 0. Pending: 14.
 
 ## Known Coverage Exclusions
 

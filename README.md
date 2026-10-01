@@ -50,6 +50,7 @@ On your own machine:
 | `powershell -ExecutionPolicy Bypass -File .\setup.ps1` | The same steps in Windows PowerShell | Not tested on Windows |
 | `setup.bat` | Starts `setup.ps1` from Windows cmd | Not tested on Windows |
 | `python scripts/check_env.py` | Print package versions, fit a small ARIMA model, read the data file | Verified |
+| `scripts/package.sh` | Build a zip of the committed files and print its SHA-256 hash (needs a clean working tree) | Verified |
 | `python scripts/make_data.py` | Regenerate `data/energy_demand_daily.csv` | Verified |
 | `jupyter nbconvert --to notebook --execute --inplace notebooks/0*.ipynb` | Run every notebook and refresh the outputs | Verified, 135 seconds |
 
