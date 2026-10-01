@@ -8,6 +8,8 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Added
 
+- Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
+
 ### Changed
 
 ### Deprecated
