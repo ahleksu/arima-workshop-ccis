@@ -57,7 +57,7 @@ The system delivers a 60-minute ARIMA forecasting workshop for CCIS faculty. It 
 
 ## Required Verification
 
-- `python scripts/check_env.py` (Pending)
-- `jupyter nbconvert --execute` on every notebook (Pending)
-- `npm run build` in `web/` and the Playwright demo check (Pending)
-- A network-off run of notebooks `01`, `03`, and `05` (Pending)
+- `python scripts/check_env.py` (results in `docs/TEST_CASES.md`)
+- `jupyter nbconvert --execute` on every notebook (results in `docs/TEST_CASES.md`)
+- `npm run build` in `web/` and the Playwright demo check (results in `docs/TEST_CASES.md`)
+- A network-off run of notebooks `01`, `03`, and `05` (results in `docs/TEST_CASES.md`)

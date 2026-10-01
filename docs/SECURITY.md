@@ -91,10 +91,10 @@ The project collects no analytics, no cookies, and no personal data. Prohibited 
 
 ## Security Verification
 
-- Run a secret scan before each push (Pending).
-- Run `shellcheck` on `setup.sh` (Pending).
-- Run the XSS string test on the web demos (Pending).
-- Review `data/README.md` against `data/` (Pending).
+- Run a secret scan before each push (results in `docs/TEST_CASES.md`).
+- Run `shellcheck` on `setup.sh` (results in `docs/TEST_CASES.md`).
+- Run the XSS string test on the web demos (results in `docs/TEST_CASES.md`).
+- Review `data/README.md` against `data/` (results in `docs/TEST_CASES.md`).
 - Record each result with its date in `docs/TEST_CASES.md`.
 
 ## Incident Handling
