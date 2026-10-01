@@ -10,6 +10,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 - Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
 - Seven pre-executed notebooks for Colab and local use: setup check, stationarity, AR and MA, ARIMA, SARIMA with exogenous variables, forecast validation, and a template for your own data (#2, #3, #4, #5, #6, #7, #8)
+- Workshop slides with speaker notes (Marp source, PDF, and HTML) and a timed agenda with pre-flight checklist (#10)
 - Setup scripts for macOS, Linux, and Windows, and `scripts/check_env.py` (#9)
 - Static web explorer with a lecture page and three interactive demos (stationarity, AR and MA simulator, ARIMA playground), and a GitHub Pages deploy workflow (#11, #12)
 
