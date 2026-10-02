@@ -1,5 +1,5 @@
 /*
- * ARIMA Workshop. A line map: two lines, twelve stops, signs on white enamel.
+ * ARIMA Workshop. A line map: two lines, nine stops, signs on white enamel.
  * One type family: Barlow for reading, Barlow Semi Condensed for signs.
  * Light mode only. Colors are tokens. Each page picks a line color through --line.
  */
@@ -71,9 +71,9 @@ body {
 
 .wrap {
   width: 100%;
-  max-width: 76rem;
+  max-width: 150rem;
   margin: 0 auto;
-  padding: 0 clamp(16px, 4vw, 40px);
+  padding: 0 clamp(16px, 3vw, 56px);
 }
 
 main {
@@ -340,7 +340,7 @@ h3 {
 }
 
 .lead {
-  max-width: 40rem;
+  max-width: 52rem;
   font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem);
   line-height: 1.5;
   color: var(--ink);
@@ -520,6 +520,7 @@ h3 {
 
 .stop-name {
   font: 700 1.3rem/1.15 var(--sign-font);
+  overflow-wrap: normal;
 }
 
 .stop-min {
@@ -690,12 +691,141 @@ h3 {
   }
 }
 
+/* The map: a marker travels along the stops */
+
+.map-lines {
+  position: relative;
+}
+
+.train {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid var(--sign);
+  border-radius: 50%;
+  background: var(--lecture);
+  box-shadow: 0 0 0 3px var(--ink);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .map .stop {
+    animation: stop-in 480ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 90ms);
+  }
+}
+
+@keyframes stop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 90rem) {
+  /* Wide screens: one journey from left to right, from the lecture line through the interchange to the hands-on line. */
+  .map-lines {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) clamp(10rem, 12vw, 15rem) minmax(0, 1.5fr);
+    grid-template-rows: auto auto;
+    align-items: start;
+  }
+
+  .map-lines > .line-title-lecture {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .map-lines > .line-lecture {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .map-lines > .interchange {
+    grid-column: 2;
+    grid-row: 2;
+    display: block;
+    margin: 0;
+    padding: 46px 6px 0;
+    text-align: center;
+  }
+
+  .map-lines > .line-title-handson {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .map-lines > .line-handson {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .interchange::before,
+  .interchange::after {
+    position: absolute;
+    flex: none;
+    top: 8px;
+    height: 10px;
+    border-radius: 0;
+  }
+
+  .interchange::before {
+    left: 0;
+    right: 50%;
+    bottom: auto;
+    width: auto;
+  }
+
+  .interchange::after {
+    left: 50%;
+    right: 0;
+    bottom: auto;
+    width: auto;
+  }
+
+  .interchange .ring {
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    margin: 0 0 0 -20px;
+  }
+
+  .interchange-label {
+    max-width: none;
+  }
+
+  /* Close the gaps so that the line runs without a break through the interchange. */
+  .line-lecture .stop:last-child::after,
+  .line-handson .stop:first-child::before {
+    display: block;
+  }
+}
+
+.home-hero {
+  display: grid;
+  gap: 8px 64px;
+  align-items: start;
+}
+
+@media (min-width: 75rem) {
+  .home-hero {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .also {
+    padding-top: clamp(40px, 5vw, 96px);
+  }
+}
+
 .page-home .intro {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .sign-hero {
-  max-width: 16ch;
+  max-width: 14ch;
 }
 
 .when {
@@ -704,30 +834,16 @@ h3 {
   color: var(--ink-2);
 }
 
+.also h2 {
+  margin-top: 28px;
+}
+
 .also-list {
   display: grid;
-  gap: 4px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.also-list li {
-  padding: 12px 0 12px 40px;
-  border-top: 1px solid var(--rule);
-  position: relative;
-}
-
-.also-list li::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 21px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 6px solid var(--dot);
-  background: var(--sign);
 }
 
 .also-demos {
@@ -738,13 +854,71 @@ h3 {
   --dot: var(--reference);
 }
 
-.also-list a {
-  font: 700 1.3rem var(--sign-font);
+.also-card {
+  display: grid;
+  gap: 4px;
+  padding: 16px 20px 16px 26px;
+  position: relative;
   color: var(--ink);
+  text-decoration: none;
+  background: var(--sign);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  transition: border-color 120ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.also-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 8px;
+  border-radius: 0 4px 4px 0;
+  background: var(--dot);
+}
+
+.also-card:hover {
+  border-color: var(--dot);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .also-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.also-title {
+  font: 700 1.5rem var(--sign-font);
+}
+
+.also-text {
+  font-size: 1.1rem;
+  color: var(--ink-2);
+}
+
+.about {
+  display: grid;
+  gap: 4px 48px;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.about h2 {
+  margin: 0;
+  font-size: 1.3rem;
 }
 
 .about p {
-  max-width: 40rem;
+  max-width: 56rem;
+  margin: 0 0 8px;
+}
+
+@media (min-width: 62rem) {
+  .about {
+    grid-template-columns: minmax(10rem, 1fr) minmax(0, 4fr);
+  }
 }
 
 /* Lecture */
@@ -900,13 +1074,31 @@ h3 {
 }
 
 .stage.no-visual {
-  max-width: 44rem;
+  max-width: 52rem;
 }
 
 @media (min-width: 62rem) {
   .stage:not(.no-visual) {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   }
+}
+
+@media (min-width: 90rem) {
+  .stage:not(.no-visual) {
+    grid-template-columns: minmax(30rem, 4fr) minmax(0, 8fr);
+    gap: 32px 64px;
+  }
+}
+
+.visual-stack {
+  display: grid;
+  gap: 24px;
+}
+
+.extra-title {
+  margin: 0 0 10px;
+  font-size: 1.15rem;
+  color: var(--ink-2);
 }
 
 .statement {
@@ -917,7 +1109,7 @@ h3 {
 
 .support {
   margin: 0 0 20px;
-  max-width: 38rem;
+  max-width: 52rem;
   font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.4rem);
   line-height: 1.5;
 }
@@ -1208,8 +1400,24 @@ h3 {
   font-size: 1.1rem;
 }
 
+.platform-body {
+  display: grid;
+  gap: 8px 56px;
+  align-items: start;
+}
+
+@media (min-width: 75rem) {
+  .platform-body:has(.platform-side) {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+
+.platform-side > :first-child {
+  margin-top: 0;
+}
+
 .task {
-  max-width: 40rem;
+  max-width: 52rem;
   margin: 0 0 16px;
 }
 
@@ -1217,7 +1425,7 @@ h3 {
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 4px 20px;
-  max-width: 44rem;
+  max-width: 52rem;
   margin: 0 0 8px;
   padding: 12px 16px;
   background: var(--sign);
@@ -1235,8 +1443,8 @@ h3 {
 }
 
 .check {
-  max-width: 44rem;
-  margin-top: 16px;
+  max-width: 52rem;
+  margin-top: 0;
   padding: 14px 18px 16px;
   background: var(--sign);
   border: 2px solid var(--handson);
@@ -1255,7 +1463,7 @@ h3 {
 }
 
 .help {
-  max-width: 44rem;
+  max-width: 52rem;
   margin-top: 12px;
 }
 
@@ -1292,7 +1500,7 @@ h3 {
   margin: 0 0 20px;
   padding: 0;
   list-style: none;
-  max-width: 48rem;
+  max-width: 56rem;
 }
 
 .takehome li {
@@ -1516,7 +1724,13 @@ h3 {
 
 /* Glossary */
 
+.glossary {
+  columns: 30rem;
+  column-gap: 64px;
+}
+
 .glossary dt {
+  break-after: avoid;
   margin-top: 24px;
   font: 700 1.5rem var(--sign-font);
   color: var(--reference);
@@ -1537,6 +1751,8 @@ h3 {
 .glossary dd {
   margin: 4px 0 0;
   max-width: 44rem;
+  break-before: avoid;
+  break-inside: avoid;
 }
 
 .glossary .see {
