@@ -85,6 +85,7 @@ Missing local data file. On Colab, the notebook has no local copy of the CSV, so
 | PRD-FR-009 | The repository provides a dissertation playbook and a data-fit checklist. | Faculty apply ARIMA in research. | Both documents exist and are linked from `README.md`. |
 | PRD-FR-010 | The repository provides a pricing plan document with future tiers and no implemented billing. | Records the monetization idea without scope risk. | `docs/pricing-plan.md` exists and the app has no payment code. |
 | PRD-FR-011 | A packaging script builds `arima-workshop-ccis-<version>.zip` for Google Drive. | Distribution outside GitHub. | The zip contains the files that the script lists and excludes `.venv` and `node_modules`. |
+| PRD-FR-013 | A script builds an `export/` folder with the notebooks, data, slides, and guides for upload to Google Drive. | Attendees open the notebooks from a Drive folder on Colab free tier. | `scripts/make_export.sh` lists the files, and notebook `03` runs from `export/notebooks`. |
 
 ## Non-Functional Requirements
 
