@@ -63,7 +63,7 @@ Two days before:
 The night before:
 
 - [ ] Open the repository page and the web explorer from a phone. Both must load.
-- [ ] Run `scripts/make_export.sh` and make sure that the Drive folder matches `export/`.
+- [ ] Run `scripts/make_export.sh` and make sure that the Drive folder matches `export/`. Open `START_HERE.md` in the Drive folder and make sure that its Colab links open.
 - [ ] Export the slide PDF to the laptop and to a USB drive.
 - [ ] Run `.venv/bin/jupyter lab` on the laptop and open notebook `03`.
 - [ ] Charge the laptop. Pack the display adapter.

@@ -23,6 +23,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Changed
 
+- The Drive export now holds the local setup scripts and `scripts/check_env.py`. `START_HERE.md` has a Colab path with direct links and a local path with setup steps. `scripts/make_export.sh` checks its output and exits with code 1 when a file is missing (#37)
 - The session is now four lecture chapters (Intro, What is ARIMA, Requirements, and Fitting) in 20 minutes, and one hands-on notebook, `03`, in 40 minutes with a recap. Notebooks `01` and `02` are background and take-home. The agenda, lecture guide, Drive guide, slides, and test cases follow it (#35)
 - The web explorer uses the full screen width and the Home page has a new layout. Lecture pages no longer show minute chips or the arrow-key hint, and the answer box is titled Question (#35)
 - The web explorer is light mode only and uses the bundled Barlow fonts (#31)
@@ -36,5 +37,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 - Web explorer routes `#/lecture/5` to `#/lecture/7` and `#/hands-on/a`, `b`, `c`, and `wrap`. The Hands-on page now uses `setup`, `prepare`, `fit`, `forecast`, and `recap` (#35)
 
 ### Fixed
+
+- The Drive export had no way to set up Python on a local machine, and its guide did not mention `bash setup.sh`, which works after a Drive download removes the executable bit (#37)
 
 ### Security
