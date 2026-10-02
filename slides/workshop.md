@@ -5,7 +5,7 @@ paginate: true
 math: katex
 footer: "ARIMA Workshop for CCIS | github.com/ahleksu/arima-workshop-ccis"
 style: |
-  section { font-size: 26px; }
+  section { font-size: 28px; }
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
   section.lead { text-align: center; }
   section h1 { color: #1b4965; }
@@ -17,45 +17,47 @@ style: |
 <!-- _class: lead -->
 <!-- _paginate: false -->
 
-# ARIMA Time Series Forecasting for Research
+# Forecast one series with ARIMA
 
-A 60-minute workshop for CCIS faculty
+20 minutes of ideas. 40 minutes of hands-on.
 
-Oct 2, 2026 | 3 PM to 4 PM
+CCIS faculty workshop | Oct 2, 2026 | 3 PM to 4 PM
 
 Slides, notebooks, and web explorer: **github.com/ahleksu/arima-workshop-ccis**
 
 <!--
-0:00. Welcome. Ask for a show of hands: who has fit an ARIMA model before? Who supervises a thesis that includes forecasting? Say that every notebook is on GitHub and opens in Colab. Nobody needs to install anything today.
+0:00. This deck is the backup for the Lecture page of the web explorer. Use the same seven beats. Ask for a show of hands: who has fit an ARIMA model before? Say that nobody installs anything today. Every notebook runs in Colab.
 -->
 
 ---
 
-# Today in 60 minutes
+# The hour
 
-| Time | Segment | You will leave with |
-| --- | --- | --- |
-| 0 to 5 | Why ARIMA in research | A rule for when it fits |
-| 5 to 15 | Stationarity and differencing | A test you can defend |
-| 15 to 25 | AR, MA, ACF, PACF | How to read the plots |
-| 25 to 42 | Fit ARIMA and SARIMAX | A model you can diagnose |
-| 42 to 53 | Forecast and validate | An honest evaluation |
-| 53 to 60 | Take-home | A plan for your own data |
+| Minute | What happens |
+| --- | --- |
+| 0 to 20 | **Lecture** in seven short beats |
+| 20 to 22 | Open notebook `01` in Colab |
+| 22 to 33 | **Block A.** Stationarity (`01`) |
+| 33 to 45 | **Block B.** AR, MA, ACF, PACF (`02`) |
+| 45 to 57 | **Block C.** Fit and forecast an ARIMA (`03`) |
+| 57 to 60 | Wrap-up and take-home |
 
-<!-- Say that notebooks 01, 03, and 05 are the live path. The others are for home. Open the repo link in the browser now so people can follow. -->
+<!-- Say that notebooks 04, 05, and 06 are for after the session. Open the Drive folder link now so people can see it. -->
 
 ---
 
-# Where ARIMA shows up in CCIS work
+# Beat 1. The question
 
-- **Systems:** server load, API calls, network traffic, storage growth
-- **Software engineering:** issue arrival, build failures, commit activity
-- **Education:** enrollment, course demand, library use, exam attempts
-- **IoT and energy:** sensor streams, power use, temperature
-- **Information systems:** sales, help-desk tickets, app usage
-- **Dissertations:** the **baseline** you compare an LSTM or Prophet model against
+## What comes next?
 
-<!-- Ask the room for one series from their own work. Write two or three on the board. Come back to them at 53 minutes. -->
+- A time series is a list of values in time order
+- Yesterday helps to predict today, so the order carries information
+- ARIMA learns that link from the past and projects it forward
+- It is also the **baseline** that a newer model must beat
+
+**Name one series from your own work.**
+
+<!-- 0:00 to 0:02. Ask the room. Write two or three answers on the board: server load, enrollment, sensor readings, help-desk tickets. You come back to them at minute 57. -->
 
 ---
 
@@ -86,264 +88,191 @@ Slides, notebooks, and web explorer: **github.com/ahleksu/arima-workshop-ccis**
 
 ---
 
-# The workflow in one slide
+# Beat 2. Look first
 
-1. **Plot** the data and read it
-2. **Stabilize**: transform and difference until stationary
-3. **Identify**: ACF and PACF suggest orders
-4. **Estimate**: maximum likelihood
-5. **Diagnose**: residuals must look like white noise
-6. **Forecast** with intervals
-7. **Validate**: backtest against a baseline
+Four parts of a series:
 
-*Box and Jenkins, 1970. Steps 3 to 5 repeat until the model is adequate.*
+- **Trend:** a slow rise or fall
+- **Seasonality:** a pattern that repeats at a fixed period
+- **Cycle:** long swings with no fixed period
+- **Noise:** the part that nothing explains
 
----
+Our data is daily electricity demand. It is **synthetic**, so we know the truth.
 
-<!-- _class: lead -->
+*Plot first. Test second.*
 
-# Part 1
-## Time series fundamentals
-
-Notebook `01_fundamentals_stationarity`
+<!-- 0:02 to 0:05. Show the STL plot from notebook 01, section 2, or the chart on the Lecture page. Point at the weekend dip. Say that rows of a time series cannot be shuffled, because yesterday predicts today. -->
 
 ---
 
-# Four parts of a series
+# Beat 3. Stationarity
 
-- **Trend:** slow movement up or down
-- **Seasonality:** a fixed repeating pattern (week, year)
-- **Cycle:** irregular long swings
-- **Noise:** what is left
+A series is **stationary** when its rules do not change over time:
 
-Our data: daily electricity demand, 2015 to 2024. It is **synthetic**, so we know the truth.
+- the mean stays constant
+- the spread stays constant
+- the link between a value and the value k steps earlier depends only on k
 
-<!-- Switch to notebook 01, section 1 and 2. Show the STL plot. Zoom in on one month to show the weekend dip. About 3 minutes. -->
+Why: ARIMA learns **one** set of coefficients. That only works if the pattern holds in the future.
 
----
+A trend breaks it.
 
-# Weak stationarity
-
-A series $y_t$ is weakly stationary when
-
-1. $E[y_t] = \mu$ (constant mean)
-2. $\mathrm{Var}(y_t) = \sigma^2 < \infty$ (constant variance)
-3. $\mathrm{Cov}(y_t, y_{t+h}) = \gamma(h)$ (depends only on the lag)
-
-Why we care: ARIMA estimates **one** set of coefficients. That only makes sense if the process does not change over time.
+<!-- 0:05 to 0:07. Plain version: the rules of the game do not change. Use the stationarity demo if time allows. -->
 
 ---
 
-# Test it: Augmented Dickey-Fuller
+# Differencing and the ADF test
 
-- Null hypothesis: **unit root** (non-stationary)
-- Small p-value (below 0.05): reject, evidence of stationarity
-- Pair it with **KPSS**, which has the opposite null
+**Difference:** replace each value by its change, $y_t - y_{t-1}$. A rising line becomes a flat line.
 
-**Live result on our data**
-- Level, constant only: p = 0.63. Cannot reject.
-- Level, constant and trend: p < 0.001. Rejects. **Trend-stationary.**
-- After one difference: p < 0.001.
+**ADF test**
+- Null hypothesis: the series is **non-stationary** (unit root)
+- **Small** p-value (below 0.05): the series looks stationary
 
-<!-- Notebook 01, section 4. This is a good teaching moment: the answer depends on the regression option. State your choice in the methods section. -->
+**Our data:** level p = 0.63, first difference p near 0.
 
----
+*Difference as little as possible. Each extra difference adds noise.*
 
-# Fix it: difference and transform
-
-- **First difference** $y_t - y_{t-1}$ removes a stochastic trend
-- **Seasonal difference** $y_t - y_{t-7}$ removes a weekly pattern
-- **Box-Cox** stabilizes variance when swings grow with the level
-- Difference as **little** as possible. Over-differencing adds noise.
-
-*Invert the transform after forecasting, and report errors on the original scale.*
-
-<!-- Notebook 01, sections 5 and 6. Show the Box-Cox plot for the growing-variance series. Finish at minute 15. -->
+<!-- 0:07 to 0:09. Ask: a series climbs 5 units every month. What does its first difference look like? A flat line at 5. Warn that the ADF null is the opposite of what people expect. -->
 
 ---
 
-<!-- _class: lead -->
+# Beat 4. Two kinds of memory
 
-# Part 2
-## AR and MA processes
-
-Notebook `02_ar_ma_acf_pacf` and the **web explorer**
-
----
-
-# Autoregression and moving average
-
-**AR(p):** today depends on its own past
+**AR(p):** memory of **values**
 
 $$y_t = c + \phi_1 y_{t-1} + \dots + \phi_p y_{t-p} + \varepsilon_t$$
 
-**MA(q):** today depends on recent shocks
+**MA(q):** memory of **shocks**
 
 $$y_t = \mu + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \dots + \theta_q \varepsilon_{t-q}$$
 
-AR needs $|\phi| < 1$ (stationary). MA needs $|\theta| < 1$ (invertible).
+The error $\varepsilon_t$ is the surprise: the part that no earlier value predicts.
+
+<!-- 0:09 to 0:11. Say it in words first: AR is "today is about 0.7 times yesterday, plus a surprise". MA is "today is noise plus a fraction of yesterday's noise". -->
 
 ---
 
-# Reading the ACF and PACF
+# Reading the fingerprints
 
 | Process | ACF | PACF |
 | --- | --- | --- |
-| AR(p) | Decays | **Cuts off** after lag p |
-| MA(q) | **Cuts off** after lag q | Decays |
-| ARMA(p, q) | Decays | Decays |
+| AR(p) | Fades | **Stops** after lag p |
+| MA(q) | **Stops** after lag q | Fades |
+| Both | Fades | Fades |
+| White noise | No spikes | No spikes |
 
-The blue band is about $\pm 1.96/\sqrt{n}$. One in twenty spikes crosses it by chance.
+**The plot that stops names the order.**
 
-<!-- Open the web explorer: ahleksu.github.io/arima-workshop-ccis. Go to the AR and MA simulator. Set AR(1) with phi = 0.8, then phi = -0.8, then switch to MA(1). Let people call out what the ACF and PACF will do before you click. About 6 minutes. -->
+The blue band is about $\pm 1.96/\sqrt{n}$. One spike in twenty crosses it by chance.
 
----
-
-# Try it yourself: three mystery series
-
-Notebook 02, section 6.
-
-- Look at the ACF and PACF of series A, B, and C
-- Write down your guess
-- Run the reveal cell
-
-**Lesson from the live run:** the criteria do not always find the truth. For A, both picked ARMA(2,2) and the truth is AR(2). For B, AIC picked ARMA(2,2) and BIC picked the true MA(1). For C, both were right. Report both criteria, check whether the extra terms are significant, and prefer the simpler model when scores are close.
-
-<!-- Give them 2 minutes in Colab. Do not run the whole notebook live. Finish at minute 25. -->
+<!-- 0:11 to 0:13. Open the AR and MA simulator on the Demos page. Set AR(1) with 0.7, then switch to MA(1). Ask: the ACF stops after lag 2 and the PACF fades. Which memory is it? MA(2). -->
 
 ---
 
-<!-- _class: lead -->
+# Beat 5. Three dials
 
-# Part 3
-## ARIMA and SARIMAX on energy demand
+**ARIMA(p, d, q)**
 
-Notebooks `03` and `04`
+- **p:** how many past values
+- **d:** how many differences
+- **q:** how many past surprises
 
----
+1. Choose **d**: difference until stationary, and no more
+2. Read the ACF and PACF for candidate **p** and **q**
+3. Fit the candidates and compare **AIC** and **BIC** (lower is better)
+4. Within about 2 points, take the **simpler** model
 
-# ARIMA(p, d, q)
-
-$$\phi(B)\,(1-B)^d\, y_t = c + \theta(B)\,\varepsilon_t$$
-
-- **p** autoregressive terms
-- **d** number of differences
-- **q** moving average terms
-- Estimated by **maximum likelihood**: the coefficients that make the data most probable
-
-Select with **AIC** and **BIC**. Lower is better. Within 2 points, take the simpler model.
+<!-- 0:13 to 0:16. Show the ARIMA playground. Change p, d, and q. No dial is magic. You look for a simple model whose leftovers look like noise. -->
 
 ---
 
-# Live: fit and diagnose (notebook 03)
+# Our result (notebook 03)
 
-1. Hold out the last 26 weeks
-2. ADF says $d = 1$
-3. Grid search $p, q \in \{0..3\}$
-4. Parsimony rule picks **ARIMA(0,1,1)**
-5. **Ljung-Box** on residuals: passes at lags 10 and 26, borderline at lag 52
-6. Forecast is **flat**, MAE about 18.5 GWh (1.1 percent)
+- Weekly demand, 182 training weeks
+- ADF says $d = 1$
+- Lowest AIC: ARIMA(2,1,1). Lowest BIC: ARIMA(0,1,1)
+- Five models are within 2 AIC points, so the **parsimony rule** picks **ARIMA(0,1,1)**
 
-*A low AIC is not proof that the model is adequate.*
+You will build this yourself in Block C.
 
-<!-- Run notebook 03 live, top to bottom, in the pre-executed form. Pause on the profile-likelihood plot (section 6) and on the diagnostics. Say what each panel checks. About 8 minutes. -->
+<!-- Keep this short. It sets up Block C. -->
 
 ---
 
-# Seasonality and outside drivers
+# Beat 6. Can you trust it?
 
-$$\mathrm{ARIMA}(p,d,q)(P,D,Q)_s \qquad s = 7 \text{ for daily data with a weekly pattern}$$
+1. **Residuals** (what the model missed) must look like white noise
+2. **Ljung-Box test:** a **large** p-value is good here. This is the opposite of ADF.
+3. **Hold-out test:** fit on the past, forecast the last part, compare
+4. **Baseline:** beat a naive forecast, or the model has earned nothing
 
-**SARIMAX** adds regressors: temperature (heating and cooling degrees) and holidays.
+Our test: 26 weeks held out. Error 18.5 GWh, 1.1 percent of the mean.
 
-| Model | MAE, 6-month test |
-| --- | --- |
-| SARIMA, no drivers | 23.0 GWh |
-| SARIMAX, with drivers | 15.2 GWh |
+*A low AIC does not prove that the model is adequate.*
 
-Estimated effects: 6.5 GWh per heating degree, 5.9 per cooling degree, and -146 GWh on a holiday. The generator used 6.5, 6.5, and -140.
-
-<!-- Notebook 04, sections 3 to 7. Point out the caveat: this test used the actual temperature. In production you need a weather forecast, so expect larger errors. -->
+<!-- 0:16 to 0:18. Ask: the Ljung-Box p-value is 0.001. Good or bad? Bad. Also mention that at lag 52 our p-value is about 0.04: a mild yearly pattern that notebook 04 handles. -->
 
 ---
 
-# Three traps
+# Beat 7. Handoff
 
-1. **Multicollinearity:** temperature with heating and cooling degrees is perfectly collinear. Check VIF.
-2. **Future regressors:** you need their future values to forecast.
-3. **Over-differencing:** the seasonal MA coefficient near $-1$ is a warning. For fixed calendar patterns, try weekday dummies instead.
+For the next 40 minutes:
 
-`pmdarima.auto_arima` is a good first pass. Still diagnose.
+1. Open the link for notebook `01` on the Hands-on page
+2. Run the cells **top to bottom** (Shift + Enter)
+3. Read the text above each cell before you run it
+4. Answer the check question at the end of each block
+5. Raise a hand when a cell fails
 
-<!-- Finish at minute 42. If you are behind, skip the grid-search detail and go straight to results. -->
-
----
-
-<!-- _class: lead -->
-
-# Part 4
-## Forecast and validate
-
-Notebook `05_forecasting_validation`
+<!-- 0:18 to 0:20. Have everyone open the first notebook before you stop talking. -->
 
 ---
 
-# Point forecast and interval
+# Block A. Stationarity (notebook 01)
 
-- A point forecast hides the uncertainty
-- A 95 percent interval should cover about 95 percent of actual values
-- In our test, coverage was **98.9 percent**. The intervals were too wide because six outliers inflated the error variance.
+**11 minutes.** Run sections 1 to 5. Skip section 6 (Box-Cox).
 
-**Always check coverage.** Report it.
+**Check question**
+What is the ADF p-value of the level, and of the first difference?
 
----
-
-# Metrics and a baseline
-
-| Metric | Use |
-| --- | --- |
-| MAE | Same unit as the data |
-| RMSE | Punishes large errors |
-| MAPE | Percent. Breaks near zero |
-| MASE | Below 1 beats the seasonal naive baseline |
-
-**Rolling-origin backtest** (26 origins, 7-day horizon):
-
-| Method | MAE | MASE |
-| --- | --- | --- |
-| SARIMAX, expanding window | 12.9 | 0.47 |
-| SARIMAX, rolling 730 days | 13.2 | 0.48 |
-| Seasonal naive | 26.4 | 0.95 |
+<!-- Answer: 0.63 for the level, about 0 for the first difference. Move on at minute 33. -->
 
 ---
 
-# Breaks and outliers
+# Block B. AR, MA, ACF, PACF (notebook 02)
 
-- A demand shock starts on 2020-03-15. A model fitted before it cannot see it: **MAE 81 GWh** during the shock.
-- Handle a break: **detect and report**, **intervention variable**, **shorter window**, **wider intervals**.
-- Outliers: flag with standardized residuals. Each spike leaves a smaller **echo** the next day.
-- Find out **why** before you act. Never delete points silently.
+**12 minutes.** Run sections 1 to 3, then the section 6 exercise. Skip sections 4 and 5.
 
-<!-- Notebook 05, sections 4 and 5. Finish the live part at minute 53. The pipeline section is for home. -->
+**Check question**
+For series A, do AIC and BIC find the true model?
 
----
-
-# From notebook to pipeline
-
-1. **Validate** the input. Fail loudly.
-2. **Fit** and **forecast**
-3. **Record** data range, orders, versions
-4. **Monitor** recent error. Alert past a threshold
-5. **Fallback** to the seasonal naive forecast
-
-*A forecast that runs once is a notebook. One that runs every week is a pipeline.*
+<!-- Answer: no. Both pick ARMA(2,2) and the truth is AR(2). The criteria are advice, not proof. Move on at minute 45. -->
 
 ---
 
-<!-- _class: lead -->
+# Block C. Fit and forecast (notebook 03)
 
-# Take-home
-## Make it yours
+**12 minutes.** Run sections 1 to 5, 7, and 8. Skip section 6 (likelihood plot).
+
+**Check question**
+Which order does the parsimony rule pick, and what is the test error?
+
+<!-- Answer: ARIMA(0,1,1), with an error of 18.5 GWh. Move on at minute 57. -->
+
+---
+
+# Wrap-up
+
+- Plot first, test second
+- Difference as little as possible
+- The plot that stops names the order
+- Fit, then diagnose, then decide
+- A forecast needs a baseline and a hold-out test
+
+**After today:** notebook `04` (seasonal terms and outside drivers), `05` (validation), `06` (your own data).
+
+<!-- 57 to 60. Return to the series on the board. Ask which notebook they will try first. -->
 
 ---
 
@@ -358,7 +287,7 @@ Notebook `05_forecasting_validation`
 7. Is the evaluation out of sample, from many origins?
 8. Are intervals reported, with their coverage?
 
-<!-- Tell them this slide is the single most reusable thing in the workshop. It is also in docs/dissertation-playbook.md. -->
+<!-- Tell them this slide is the most reusable thing in the workshop. It is also in docs/dissertation-playbook.md. -->
 
 ---
 
@@ -392,4 +321,4 @@ Free and open. Code MIT. Content CC BY 4.0.
 
 Come back to the series you wrote on the board at the start.
 
-<!-- 57 to 60. Take questions. Point people to the Issues page for follow-up. -->
+<!-- Point people to the Issues page for follow-up. -->

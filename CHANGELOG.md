@@ -8,6 +8,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Added
 
+- Lecture guide that explains each concept in plain words, with a script, a question for the room, and a trap to avoid for each beat (#30)
 - Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
 - Seven pre-executed notebooks for Colab and local use: setup check, stationarity, AR and MA, ARIMA, SARIMA with exogenous variables, forecast validation, and a template for your own data (#2, #3, #4, #5, #6, #7, #8)
 - Packaging script that builds a zip of the committed files and prints its SHA-256 hash (#15)
@@ -18,6 +19,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Changed
 
+- Session plan is now 20 minutes of lecture in seven beats and 40 minutes of hands-on on notebooks 01, 02, and 03. The agenda and slides follow it (#30)
 ### Deprecated
 
 ### Removed
