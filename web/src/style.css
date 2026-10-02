@@ -857,7 +857,7 @@ h3 {
 .also-card {
   display: grid;
   gap: 4px;
-  padding: 16px 20px 16px 26px;
+  padding: 16px 20px 16px 60px;
   position: relative;
   color: var(--ink);
   text-decoration: none;
@@ -870,12 +870,13 @@ h3 {
 .also-card::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 8px;
-  border-radius: 0 4px 4px 0;
-  background: var(--dot);
+  left: 18px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 7px solid var(--dot);
+  background: var(--sign);
 }
 
 .also-card:hover {

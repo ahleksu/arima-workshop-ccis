@@ -1,6 +1,6 @@
 ---
 name: ARIMA Workshop
-description: A line map for a one-hour lecture. Two lines, twelve stops, white enamel signs on a pale platform.
+description: A line map for a one-hour lecture. Two lines, nine stops, white enamel signs on a pale platform.
 colors:
   lecture-blue: "#1257d6"
   lecture-blue-dark: "#0d44b0"
@@ -90,7 +90,7 @@ components:
 
 **Creative North Star: "The Line Map"**
 
-The hour is a journey on two lines. The Lecture line has seven stops. The Hands-on line has five. They meet at one interchange at minute 20. Every screen is a station sign: white enamel on a pale platform, near-black ink, a thick colored line, round stops. The design is made for a classroom projector and for a phone, in daylight and ceiling light. It is light mode only.
+The hour is a journey on two lines. The Lecture line has four stops, one for each chapter. The Hands-on line has five. They meet at one interchange at minute 20. Every screen is a station sign: white enamel on a pale platform, near-black ink, a thick colored line, round stops. The design is made for a classroom projector and for a phone, in daylight and ceiling light. It is light mode only.
 
 The system refuses the slide-deck look and the documentation-sidebar look. A page never decorates. Color names a line, and a line names a part of the hour. Type is signage: condensed, heavy, plain.
 
@@ -99,14 +99,14 @@ The system refuses the slide-deck look and the documentation-sidebar look. A pag
 - One type family in two widths: Barlow Semi Condensed for signs and Barlow for reading.
 - Round stops on a thick line (10px) appear on the map, the lecture bar, the hands-on rail, and the navigation.
 - Hairline rules, small radii, no shadows at rest.
-- One authored motion: the current stop arrives, and the statement rises.
+- Two authored motions. The current stop arrives and the statement rises. On the Home map, a marker travels from stop to stop. Both stop when the reader turns on reduced motion.
 
 ## Colors
 
 The palette is Full palette: four named line roles on a cool white and grey ground. The lines never share a meaning.
 
 ### Primary
-- **Lecture Blue** (#1257d6): the lecture line, primary buttons, links, the numbered beat dots, the Ask box border. White text on it has a 6.25:1 contrast.
+- **Lecture Blue** (#1257d6): the lecture line, primary buttons, links, the numbered chapter dots, the Question box border. White text on it has a 6.25:1 contrast.
 
 ### Secondary
 - **Hands-on Orange** (#e4570f): the hands-on line, rails, and the Colab buttons. Text on an orange fill is Signal Ink (4.95:1). Orange text on white uses Hands-on Text (#b33f00, 5.79:1).
@@ -134,7 +134,7 @@ The palette is Full palette: four named line roles on a cool white and grey grou
 
 ### Hierarchy
 - **Sign** (700, clamp 2.75rem to 5.5rem, 1.1): page titles. A 6rem line-color bar sits under it. The lecture page uses a smaller sign (clamp 2rem to 3.1rem) with a numbered dot and no bar.
-- **Statement** (700, clamp 2rem to 3.4rem, 1.08): the one sentence that the room keeps from each beat.
+- **Statement** (700, clamp 2rem to 3.4rem, 1.08): the one sentence that the room keeps from each chapter.
 - **Title** (700, 1.75rem): section headings.
 - **Body** (400, clamp 1.0625rem to 1.25rem, 1.55): reading text. Support text is larger (1.15rem to 1.4rem). Measure stays at or under 44rem.
 - **Label** (600, 1.05rem): chips, minutes, buttons (700, 1.2rem). Minutes use tabular numerals.
@@ -144,7 +144,7 @@ The palette is Full palette: four named line roles on a cool white and grey grou
 
 ## Layout
 
-A single column on phones and a two-column stage on desktop (5 parts text, 7 parts visual) from 62rem. The container is 76rem wide with a 16px to 40px gutter. The home map is two horizontal lines on desktop and one vertical line on phones, joined by the interchange. Spacing rhythm: 8, 12, 24, 44px, with more space above a heading than below it.
+A single column on phones. A two-column stage on desktop from 62rem (5 parts text, 7 parts visual) and from 90rem (4 parts text, 8 parts visual). The container fills the screen width up to 150rem, with a 16px to 56px gutter. The home map is one vertical line on phones, two stacked horizontal lines on tablets, and one journey from left to right from 90rem: the lecture line, the interchange, and the hands-on line. The Hands-on page puts the task and the check question side by side from 75rem. Spacing rhythm: 8, 12, 24, 44px, with more space above a heading than below it.
 
 ## Elevation & Depth
 
@@ -170,10 +170,10 @@ Small radii: 8px for controls, 12px for panels and buttons, full pills for chips
 Round stops sit on a 10px bar in the line color. Done stops are filled. The current stop is larger with a double ring. Upcoming stops are hollow with a grey border. The clock marks the current stop with "now".
 
 ### Chips and term pills
-Time chips are white pills with a 2px border in the page line color. Term pills are white with a 2px plum border and plum text. Hover fills the pill.
+Time chips are white pills with a 2px border in the page line color. They appear on the Hands-on stops and the Home map only. Lecture pages show no time. Term pills are white with a 2px plum border and plum text. Hover fills the pill.
 
-### Ask box
-A white panel with a 2px Lecture Blue border. It holds the question in a 1.45rem sign type and a "Show the answer" button. The revealed answer is Demos Green.
+### Question box
+A white panel with a 2px Lecture Blue border and the heading "Question". It holds the question in a 1.45rem sign type and a "Show the answer" button. The revealed answer is Demos Green.
 
 ### Navigation
 Five links, each with a ring in its line color. The current page has a filled ring and a 4px bottom bar in that color.
@@ -186,6 +186,7 @@ Five links, each with a ring in its line color. The current page has a filled ri
 - **Do** label illustrative data as synthetic where a viewer can take it for real.
 - **Do** keep contrast at 4.5:1 or better for body text and 3:1 for large text and control borders.
 - **Do** keep all pages light. Set `color-scheme: light`.
+- **Do** keep motion to the map marker and one short fade, and turn both off under `prefers-reduced-motion`.
 
 ### Don't:
 - **Do not** add dark mode or follow `prefers-color-scheme`.

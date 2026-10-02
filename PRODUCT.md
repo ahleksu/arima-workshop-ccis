@@ -16,7 +16,7 @@ The web explorer teaches ARIMA time series forecasting. It is the lecture screen
 
 ## Positioning
 
-A teaching site that the presenter can walk through beat by beat with the keyboard, with working demos that run in the browser and no backend. A neighboring slide deck or course site cannot let the room move a coefficient slider and watch the ACF change.
+A teaching site that the presenter can walk through chapter by chapter with the keyboard, with working demos that run in the browser and no backend. A neighboring slide deck or course site cannot let the room move a coefficient slider and watch the ACF change.
 
 ## Operating Context
 
@@ -28,10 +28,11 @@ A teaching site that the presenter can walk through beat by beat with the keyboa
 ## Capabilities and Constraints
 
 - Static site built with Vite, TypeScript, and bundled Plotly. No backend, no login, no analytics, no network call at runtime.
-- Pages: Home with the session plan, Lecture (seven beats), Hands-on (three notebook blocks), Demos (stationarity, AR and MA simulator, ARIMA playground), Glossary (29 terms).
+- The layout fills the screen width and works from phone to projector widths. Motion is limited to the Home map marker and a short fade, and both respect the reduced motion setting.
+- Pages: Home with the session plan as a moving line map, Lecture (four chapters), Hands-on (three steps in one notebook), Demos (stationarity, AR and MA simulator, ARIMA playground), Glossary (29 terms).
 - Deployed to GitHub Pages under `/arima-workshop-ccis/` using hash routes.
 - The user asked for light mode only. No dark mode.
-- Terminology: beat (one lecture idea), block (one hands-on notebook), demo, glossary term.
+- Terminology: chapter (one lecture idea), step (one part of notebook `03`), demo, glossary term.
 - Open decision: none.
 
 ## Brand Commitments

@@ -1,6 +1,6 @@
 # Web explorer
 
-A static site for the ARIMA workshop. It has a Home page with the session plan, a Lecture page of seven beats, a Hands-on page for the three notebook blocks, three interactive demos, and a glossary. It uses Vite, TypeScript, Plotly, and the Barlow fonts (all bundled, no CDN). It has no backend, no login, and no analytics. It is light mode only.
+A static site for the ARIMA workshop. It has a Home page with the session plan as a moving line map, a Lecture page of four chapters, a Hands-on page for the three steps of notebook `03`, three interactive demos, and a glossary. The layout uses the full screen width and works on phones, tablets, and projectors. It uses Vite, TypeScript, Plotly, and the Barlow fonts (all bundled, no CDN). It has no backend, no login, and no analytics. It is light mode only.
 
 All commands run in the `web/` folder. You need Node.js 20 or later.
 
@@ -8,15 +8,15 @@ All commands run in the `web/` folder. You need Node.js 20 or later.
 
 | Route | Page |
 | --- | --- |
-| `#/` | The session plan: two lines, twelve stops |
-| `#/lecture/1` to `#/lecture/7` | One lecture beat each. Use the left and right arrow keys. |
-| `#/hands-on` | Setup and blocks A, B, and C, with Colab links and check questions. `#/hands-on/b` jumps to block B. |
+| `#/` | The session plan: two lines, nine stops. A marker travels along the stops. |
+| `#/lecture/1` to `#/lecture/4` | One lecture chapter each. The left and right arrow keys move between chapters. |
+| `#/hands-on` | Setup, three steps, and the recap, with Colab links and check questions. `#/hands-on/fit` jumps to step 2. The other ids are `setup`, `prepare`, `forecast`, and `recap`. |
 | `#/demos` | The three demos |
 | `#/glossary` | The glossary. `#/glossary/adf-test` jumps to a term. |
 
-The session clock in the header counts up from the start of the hour and marks the current stop. It keeps its time in local storage, so a reload does not reset it.
+The session clock in the header counts up from the start of the hour and marks the current stop. It keeps its time in local storage, so a reload does not reset it. While the clock runs, the Home map marker rests at the current stop. When the clock is idle, the marker loops through all stops. With the reduced motion setting turned on in the operating system, the marker does not loop.
 
-The plan, the beats, and the blocks are in `src/content.ts`. The colors and type are tokens at the top of `src/style.css`. `DESIGN.md` at the repository root records the design system.
+The plan, the chapters, and the steps are in `src/content.ts`. The marker timing is in `src/lib/journey.ts`. The colors and type are tokens at the top of `src/style.css`. `DESIGN.md` at the repository root records the design system.
 
 ## Install
 
