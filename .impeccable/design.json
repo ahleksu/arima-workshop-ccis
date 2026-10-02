@@ -199,7 +199,7 @@
       "kind": "card",
       "refersTo": "",
       "description": "Question for the room with a hidden answer.",
-      "html": "<section class=\"ds-ask\"><h2>Ask the room</h2><p>Which memory is it?</p></section>",
+      "html": "<section class=\"ds-ask\"><h2>Question</h2><p>Which memory is it?</p></section>",
       "css": ".ds-ask{padding:16px 20px 18px;background:#fff;border:2px solid #1257d6;border-radius:12px;max-width:26rem}.ds-ask h2{margin:0 0 6px;font:700 1.15rem 'Barlow Semi Condensed',Arial,sans-serif;color:#1257d6}.ds-ask p{margin:0;font:700 1.45rem/1.25 'Barlow Semi Condensed',Arial,sans-serif;color:#10151b}"
     }
   ],

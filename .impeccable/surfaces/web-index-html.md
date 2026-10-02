@@ -13,7 +13,7 @@ Audience, job: CCIS faculty who learn ARIMA in one hour (20 minutes of lecture, 
 
 Action: every page ends in one visible next step (next beat, open the notebook, next block).
 
-Content: seven beats, three notebook blocks, three demos, 29 glossary terms. All real. The series is synthetic and labeled so.
+Content: four chapters, three hands-on steps, three demos, 29 glossary terms. All real. The series is synthetic and labeled so.
 
 Constraints: light mode only, static site, no network at runtime, bundled fonts, WCAG AA, 390 px to 1440 px.
 
