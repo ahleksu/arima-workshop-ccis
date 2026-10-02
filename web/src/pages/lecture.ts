@@ -21,7 +21,7 @@ export function lecturePage(): HTMLElement {
     'div',
     { class: 'page' },
     h('h1', {}, 'Lecture'),
-    h('p', { class: 'lead' }, 'The workshop has five modules. Each summary below is short. The notebooks hold the full material and the code.'),
+    h('p', { class: 'lead' }, 'The workshop has five modules. Each summary below is short. The notebooks hold the full material and the code. Terms you do not know are in the glossary.'),
     ...items,
   );
 }
