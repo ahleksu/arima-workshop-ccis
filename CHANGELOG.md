@@ -38,6 +38,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Fixed
 
+- The Previous and Next chapter buttons touched the footer on every page. The page now keeps 56px of space under its content, and the two buttons have the same size (#39)
 - The Drive export had no way to set up Python on a local machine, and its guide did not mention `bash setup.sh`, which works after a Drive download removes the executable bit (#37)
 
 ### Security
