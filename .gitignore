@@ -38,6 +38,9 @@ Thumbs.db
 # Distribution archives
 arima-workshop-ccis-*.zip
 
+# Folder for Google Drive upload (built by scripts/make_export.sh)
+export/
+
 # Notebook run outputs
 notebooks/outputs/
 
