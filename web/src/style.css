@@ -861,7 +861,7 @@ h3 {
   }
 }
 
-.beat-head {
+.chapter-head {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -869,7 +869,7 @@ h3 {
   gap: 8px 24px;
 }
 
-.beat-head .sign {
+.chapter-head .sign {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -878,11 +878,11 @@ h3 {
   font-size: clamp(2rem, 1.2rem + 2.4vw, 3.1rem);
 }
 
-.beat-head .sign::after {
+.chapter-head .sign::after {
   display: none;
 }
 
-.beat-no {
+.chapter-no {
   display: inline-grid;
   place-items: center;
   width: 1.1em;
@@ -891,11 +891,6 @@ h3 {
   color: var(--sign);
   background: var(--line);
   border-radius: 50%;
-}
-
-.beat-head .chip {
-  margin-bottom: 18px;
-  font-size: 1.25rem;
 }
 
 .stage {
@@ -1010,21 +1005,6 @@ h3 {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--demos);
-}
-
-.parts {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 8px 18px;
-  margin: 0;
-}
-
-.parts dt {
-  font: 700 1.2rem var(--sign-font);
-}
-
-.parts dd {
-  margin: 0;
 }
 
 .fingerprints {
@@ -1143,13 +1123,6 @@ h3 {
   display: block;
   font: 500 0.95rem var(--sign-font);
   opacity: 0.85;
-}
-
-.hint {
-  margin: 18px 0 0;
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--ink-2);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1519,10 +1492,6 @@ h3 {
   stroke-linejoin: round;
 }
 
-.vis-line-2 {
-  stroke: var(--lecture);
-}
-
 .vis-grid {
   stroke: var(--rule);
   stroke-width: 1;
@@ -1531,16 +1500,6 @@ h3 {
 .vis-tick {
   font: 500 22px var(--sign-font);
   fill: var(--ink-2);
-}
-
-.vis-label {
-  font: 600 22px var(--sign-font);
-  fill: var(--ink-2);
-}
-
-.vis-label-strong {
-  font-weight: 700;
-  fill: var(--ink);
 }
 
 .vis-band {
@@ -1553,40 +1512,6 @@ h3 {
 .vis-qmark {
   font: 700 150px var(--sign-font);
   fill: var(--lecture);
-}
-
-.vis-strip {
-  fill: var(--sign);
-  stroke: var(--rule);
-}
-
-.zone-good {
-  fill: color-mix(in srgb, var(--demos) 16%, white);
-  stroke: var(--demos);
-  stroke-width: 2;
-}
-
-.zone-bad {
-  fill: color-mix(in srgb, var(--error) 12%, white);
-  stroke: var(--error);
-  stroke-width: 2;
-}
-
-.zone-neutral {
-  fill: var(--ground);
-  stroke: var(--rule-strong);
-  stroke-width: 2;
-}
-
-.vis-zone {
-  font: 600 22px var(--sign-font);
-  fill: var(--ink);
-}
-
-.vis-cut {
-  stroke: var(--ink);
-  stroke-width: 2;
-  stroke-dasharray: 5 5;
 }
 
 /* Glossary */
@@ -1664,14 +1589,4 @@ h3 {
   .pager-next {
     margin-left: 0;
   }
-
-  .parts {
-    grid-template-columns: 1fr;
-    gap: 2px;
-  }
-
-  .parts dd {
-    margin-bottom: 10px;
-  }
-
 }

@@ -1,13 +1,13 @@
 import { REPO_URL, STOPS } from '../content';
 import { GLOSSARY } from '../lib/glossary';
 import { homeMap } from '../map';
-import { getLastBeat } from '../resume';
+import { getLastChapter } from '../resume';
 import { externalLink, h, icon } from '../ui';
 import type { Page } from './page';
 
 export function homePage(): Page {
-  const last = getLastBeat();
-  const flagged = last === null ? null : (STOPS.find((x) => x.id === `beat-${last}`)?.id ?? null);
+  const last = getLastChapter();
+  const flagged = last === null ? null : (STOPS.find((x) => x.id === `chapter-${last}`)?.id ?? null);
   const map = homeMap(flagged);
   const root = h(
     'div',
@@ -27,7 +27,7 @@ export function homePage(): Page {
         { class: 'actions' },
         h('a', { class: 'btn btn-lecture', href: '#/lecture/1' }, 'Start the lecture', icon('arrow-right')),
         h('a', { class: 'btn btn-quiet', href: '#/hands-on' }, 'See the hands-on plan'),
-        last !== null && last > 1 ? h('a', { class: 'btn btn-quiet', href: `#/lecture/${last}` }, icon('flag'), `Resume at beat ${last}`) : '',
+        last !== null && last > 1 ? h('a', { class: 'btn btn-quiet', href: `#/lecture/${last}` }, icon('flag'), `Resume at chapter ${last}`) : '',
       ),
     ),
     map.root,

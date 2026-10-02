@@ -26,7 +26,7 @@ export interface Route {
   param: string | null;
 }
 
-/** Turn a hash such as "#/lecture/3" into a route. A bad lecture number gives not-found. */
+/** Turn a hash such as "#/lecture/3" into a route. A bad chapter number gives not-found. */
 export function parseRoute(hash: string): Route {
   const path = hash.replace(/^#/, '').replace(/\/+$/, '');
   if (path === '' || path === '/') {
@@ -36,10 +36,10 @@ export function parseRoute(hash: string): Route {
   switch (first) {
     case 'lecture':
       if (second === undefined) return { page: 'lecture', param: '1' };
-      return /^[1-7]$/.test(second) ? { page: 'lecture', param: second } : { page: 'not-found', param: null };
+      return /^[1-4]$/.test(second) ? { page: 'lecture', param: second } : { page: 'not-found', param: null };
     case 'hands-on':
       if (second === undefined) return { page: 'hands-on', param: null };
-      return ['setup', 'a', 'b', 'c', 'wrap'].includes(second) ? { page: 'hands-on', param: second } : { page: 'not-found', param: null };
+      return ['setup', 'prepare', 'fit', 'forecast', 'recap'].includes(second) ? { page: 'hands-on', param: second } : { page: 'not-found', param: null };
     case 'demos':
       return second === undefined ? { page: 'demos', param: null } : { page: 'not-found', param: null };
     case 'glossary':

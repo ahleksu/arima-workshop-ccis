@@ -1,4 +1,4 @@
-import { BLOCKS, KEY_MESSAGES, notebookUrls, REPO_URL, STOPS, TAKE_HOME, type Block, type Stop } from '../content';
+import { HANDOFF_RULES, HANDS_ON_NOTEBOOK, KEY_MESSAGES, notebookUrls, REPO_URL, STEPS, STOPS, TAKE_HOME, type Step, type Stop } from '../content';
 import { subscribeClock } from '../clock';
 import { externalLink, h, icon } from '../ui';
 import type { Page } from './page';
@@ -35,24 +35,20 @@ function section(x: Stop, id: string, ...children: (Node | string)[]): HTMLEleme
   );
 }
 
-function blockSection(block: Block, id: string): HTMLElement {
-  const x = stop(block.stopId);
+function stepSection(step: Step): HTMLElement {
+  const x = stop(step.stopId);
   return section(
     x,
-    id,
-    h('p', { class: 'task' }, block.task),
+    step.id,
+    h('p', { class: 'task' }, step.task),
     h(
       'dl',
       { class: 'facts' },
-      h('dt', {}, 'Notebook'),
-      h('dd', {}, block.notebook),
       h('dt', {}, 'Run'),
-      h('dd', {}, block.run),
-      h('dt', {}, 'Skip'),
-      h('dd', {}, block.skip),
+      h('dd', {}, step.run),
+      ...(step.skip ? [h('dt', {}, 'Skip'), h('dd', {}, step.skip)] : []),
     ),
-    h('p', { class: 'actions' }, colab(block.notebook, 'Open in Colab', true), externalLink(notebookUrls(block.notebook).githubUrl, 'Read on GitHub', 'btn btn-quiet')),
-    reveal(block.check.question, block.check.answer),
+    reveal(step.check.question, step.check.answer),
   );
 }
 
@@ -60,15 +56,17 @@ export function handsOnPage(focus: string | null): Page {
   const setup = section(
     stop('setup'),
     'setup',
-    h('p', { class: 'task' }, 'Everyone opens notebook 01 and runs the first cell. Do this together, then start Block A.'),
+    h('p', { class: 'task' }, 'Everyone opens notebook 03 and runs the first cell. Do this together, then start step 1.'),
     h(
       'ol',
       { class: 'steps' },
       h('li', {}, 'Sign in to your Google account in the browser.'),
-      h('li', {}, 'Open notebook 01 in Colab with the button below.'),
+      h('li', {}, 'Open notebook 03 in Colab with the button below.'),
       h('li', {}, 'Click the first code cell and press Shift and Enter. Wait for the green check mark.'),
     ),
-    h('p', { class: 'actions' }, colab('01_fundamentals_stationarity.ipynb', 'Open notebook 01 in Colab', true)),
+    h('p', { class: 'actions' }, colab(HANDS_ON_NOTEBOOK, 'Open notebook 03 in Colab', true), externalLink(notebookUrls(HANDS_ON_NOTEBOOK).githubUrl, 'Read on GitHub', 'btn btn-quiet')),
+    h('h3', {}, 'Rules for the next 40 minutes'),
+    h('ol', { class: 'steps' }, ...HANDOFF_RULES.map((rule) => h('li', {}, rule))),
     h(
       'details',
       { class: 'help' },
@@ -84,14 +82,14 @@ export function handsOnPage(focus: string | null): Page {
     ),
   );
 
-  const blocks = BLOCKS.map((block, i) => blockSection(block, ['a', 'b', 'c'][i]));
+  const steps = STEPS.map(stepSection);
 
-  const wrap = section(
-    stop('wrap'),
-    'wrap',
-    h('p', { class: 'task' }, 'Five messages to keep. Then pick the notebook you will open first after today.'),
+  const recap = section(
+    stop('recap'),
+    'recap',
+    h('p', { class: 'task' }, 'Five messages to keep. Return to the series that you wrote on the board in chapter 1. Then pick the notebook that you will open first after today.'),
     h('ol', { class: 'steps messages' }, ...KEY_MESSAGES.map((m) => h('li', {}, m))),
-    h('h3', {}, 'Take-home notebooks'),
+    h('h3', {}, 'Background and take-home notebooks'),
     h(
       'ul',
       { class: 'takehome' },
@@ -106,8 +104,8 @@ export function handsOnPage(focus: string | null): Page {
     'div',
     { class: 'page page-handson' },
     h('h1', { class: 'sign sign-handson' }, 'Hands-on'),
-    h('p', { class: 'lead' }, '40 minutes, three notebooks, one pattern: frame it, run it, answer the check question. Move on at the end time. You can finish at home.'),
-    h('div', { class: 'platforms' }, setup, ...blocks, wrap),
+    h('p', { class: 'lead' }, 'ARIMA in Python. Everyone runs notebook 03 for 40 minutes. Each step follows one pattern: frame it, run it, answer the check question. Move on at the end time. You can finish at home.'),
+    h('div', { class: 'platforms' }, setup, ...steps, recap),
   );
 
   const unsubscribe = subscribeClock((snap) => {

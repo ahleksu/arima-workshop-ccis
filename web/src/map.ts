@@ -1,5 +1,5 @@
-/** The line diagram: two lines, twelve stops, one interchange. */
-import { BEATS, LECTURE_MINUTES, STOPS, type Stop } from './content';
+/** The line diagram: two lines, nine stops, one interchange. */
+import { CHAPTERS, LECTURE_MINUTES, STOPS, type Stop } from './content';
 import { subscribeClock } from './clock';
 import { h, icon } from './ui';
 
@@ -36,7 +36,7 @@ export function homeMap(flagStopId: string | null): MapView {
     'div',
     { class: 'interchange' },
     h('span', { class: 'ring', 'aria-hidden': 'true' }),
-    h('p', { class: 'interchange-label' }, h('strong', {}, 'Minute 20. Interchange.'), ' Everyone opens notebook 01 in Colab.'),
+    h('p', { class: 'interchange-label' }, h('strong', {}, 'Minute 20. Interchange.'), ' Everyone opens notebook 03 in Colab.'),
   );
   const root = h(
     'section',
@@ -62,16 +62,16 @@ export function homeMap(flagStopId: string | null): MapView {
   return { root, destroy: unsubscribe };
 }
 
-/** The slim bar above a beat. Dots are numbered. Done stops are filled. */
+/** The slim bar above a chapter. Dots are numbered. Done stops are filled. */
 export function lectureBar(current: number): MapView {
-  const items = BEATS.map((beat) => {
-    const stop = STOPS.find((x) => x.id === beat.stopId) as Stop;
-    const state = beat.number < current ? 'done' : beat.number === current ? 'current' : 'todo';
+  const items = CHAPTERS.map((chapter) => {
+    const stop = STOPS.find((x) => x.id === chapter.stopId) as Stop;
+    const state = chapter.number < current ? 'done' : chapter.number === current ? 'current' : 'todo';
     const link = h(
       'a',
-      { class: 'bar-link', href: stop.href, 'aria-label': `Beat ${beat.number}: ${beat.title}, ${range(stop)}` },
-      h('span', { class: 'dot', 'aria-hidden': 'true' }, String(beat.number)),
-      h('span', { class: 'bar-name' }, beat.title),
+      { class: 'bar-link', href: stop.href, 'aria-label': `Chapter ${chapter.number}: ${chapter.title}` },
+      h('span', { class: 'dot', 'aria-hidden': 'true' }, String(chapter.number)),
+      h('span', { class: 'bar-name' }, chapter.title),
     );
     if (state === 'current') link.setAttribute('aria-current', 'step');
     return h('li', { class: `bar-stop is-${state}`, 'data-stop-id': stop.id }, link);

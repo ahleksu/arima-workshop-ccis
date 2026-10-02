@@ -53,7 +53,7 @@ function render(): void {
     case 'lecture': {
       const n = Number(route.param);
       current = lecturePage(n);
-      title = `Beat ${n}`;
+      title = `Chapter ${n}`;
       break;
     }
     case 'hands-on':

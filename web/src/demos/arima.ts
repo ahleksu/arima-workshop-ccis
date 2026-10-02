@@ -102,7 +102,7 @@ export function mountArima(series: WeeklySeries): Demo {
     h(
       'p',
       { class: 'note', role: 'note' },
-      'Note: weekly demand has a yearly cycle of about 52 weeks. A non-seasonal ARIMA model cannot capture that cycle. Expect forecasts that drift toward a flat line and wide intervals. This is the reason module 4 teaches SARIMA.',
+      'Note: weekly demand has a yearly cycle of about 52 weeks. A non-seasonal ARIMA model cannot capture that cycle. Expect forecasts that drift toward a flat line and wide intervals. This is the reason that notebook 04 teaches SARIMA.',
     ),
     h('div', { class: 'controls' }, p.root, d.root, q.root, horizon.root),
     chart.root,
