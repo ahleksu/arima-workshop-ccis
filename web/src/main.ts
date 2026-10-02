@@ -1,5 +1,6 @@
 import './style.css';
 import { demosPage, type Page } from './pages/demos';
+import { glossaryPage } from './pages/glossary';
 import { homePage } from './pages/home';
 import { lecturePage } from './pages/lecture';
 import { h } from './ui';
@@ -19,6 +20,7 @@ function route(): string {
 function titleFor(path: string): string {
   if (path === '/lecture') return 'Lecture';
   if (path === '/demos') return 'Demos';
+  if (path === '/glossary') return 'Glossary';
   return 'Home';
 }
 
@@ -30,6 +32,8 @@ function render(): void {
     current = { root: lecturePage(), destroy() {} };
   } else if (path === '/demos') {
     current = demosPage();
+  } else if (path === '/glossary') {
+    current = { root: glossaryPage(), destroy() {} };
   } else if (path === '/') {
     current = { root: homePage(), destroy() {} };
   } else {
