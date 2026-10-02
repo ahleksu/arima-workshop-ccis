@@ -31,7 +31,7 @@ function axis(extra: Layout | undefined): Layout {
     gridcolor: cssVar('--grid'),
     zerolinecolor: cssVar('--muted'),
     linecolor: cssVar('--grid'),
-    tickfont: { color: cssVar('--muted') },
+    tickfont: { color: cssVar('--muted'), size: 13 },
     automargin: true,
     ...extra,
   };
@@ -50,11 +50,11 @@ export async function drawPlot(root: HTMLElement, data: unknown[], layout: Layou
     {
       autosize: true,
       height: 300,
-      margin: { l: 56, r: 12, t: 12, b: 44 },
+      margin: { l: 56, r: 12, t: 40, b: 44 },
       paper_bgcolor: 'rgba(0,0,0,0)',
       plot_bgcolor: 'rgba(0,0,0,0)',
-      font: { family: cssVar('--font'), size: 12, color: cssVar('--text') },
-      legend: { orientation: 'h', y: -0.25, font: { color: cssVar('--text') } },
+      font: { family: cssVar('--font'), size: 14, color: cssVar('--text') },
+      legend: { orientation: 'h', x: 0, y: 1.02, yanchor: 'bottom', font: { color: cssVar('--text'), size: 13 } },
       xaxis: axis(xaxis as Layout | undefined),
       yaxis: axis(yaxis as Layout | undefined),
       ...rest,
@@ -67,11 +67,4 @@ export function purgePlot(root: HTMLElement): void {
   if (loader) {
     void loader.then((Plotly) => Plotly.purge(root));
   }
-}
-
-/** Call back when the system color scheme changes. Returns a function that stops listening. */
-export function onThemeChange(callback: () => void): () => void {
-  const query = window.matchMedia('(prefers-color-scheme: dark)');
-  query.addEventListener('change', callback);
-  return () => query.removeEventListener('change', callback);
 }

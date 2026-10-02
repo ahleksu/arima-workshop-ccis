@@ -1,7 +1,7 @@
 import { checkArma, simulateArma, theoreticalAcf } from '../lib/arma';
 import { parseSeed } from '../lib/prng';
 import { mean, pacfDurbinLevinson, sampleAcf, sd } from '../lib/stats';
-import { drawPlot, onThemeChange, purgePlot, seriesColors } from '../plot';
+import { drawPlot, purgePlot, seriesColors } from '../plot';
 import { chartBlock, h, select, slider, textInput } from '../ui';
 import type { Demo } from './types';
 
@@ -199,11 +199,9 @@ export function mountArmaSim(): Demo {
   );
 
   update();
-  const stopTheme = onThemeChange(update);
   return {
     root,
     destroy() {
-      stopTheme();
       for (const c of charts) {
         purgePlot(c.plot);
       }

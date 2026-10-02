@@ -1,57 +1,87 @@
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/400-italic.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/barlow/700.css';
+import '@fontsource/barlow-semi-condensed/500.css';
+import '@fontsource/barlow-semi-condensed/600.css';
+import '@fontsource/barlow-semi-condensed/700.css';
 import './style.css';
-import { demosPage, type Page } from './pages/demos';
+import { mountClock } from './clock';
 import { glossaryPage } from './pages/glossary';
+import { demosPage } from './pages/demos';
+import { handsOnPage } from './pages/handson';
 import { homePage } from './pages/home';
 import { lecturePage } from './pages/lecture';
+import type { Page } from './pages/page';
+import { parseRoute } from './lib/session';
 import { h } from './ui';
 
 const main = document.getElementById('main');
-if (!main) {
-  throw new Error('The page is missing the main element.');
+const clockSlot = document.getElementById('clock-slot');
+if (!main || !clockSlot) {
+  throw new Error('The page is missing the main element or the clock slot.');
 }
+clockSlot.replaceChildren(mountClock());
 
 let current: Page | null = null;
 
-function route(): string {
-  const path = location.hash.replace(/^#/, '');
-  return path === '' ? '/' : path;
-}
+const TITLES: Record<string, string> = {
+  home: 'Home',
+  lecture: 'Lecture',
+  'hands-on': 'Hands-on',
+  demos: 'Demos',
+  glossary: 'Glossary',
+  'not-found': 'Page not found',
+};
 
-function titleFor(path: string): string {
-  if (path === '/lecture') return 'Lecture';
-  if (path === '/demos') return 'Demos';
-  if (path === '/glossary') return 'Glossary';
-  return 'Home';
+function notFound(): Page {
+  return {
+    root: h('div', { class: 'page' }, h('h1', { class: 'sign' }, 'Page not found'), h('p', { class: 'lead' }, 'Use the menu to go to a page.')),
+    destroy() {},
+  };
 }
 
 function render(): void {
   current?.destroy();
   current = null;
-  const path = route();
-  if (path === '/lecture') {
-    current = { root: lecturePage(), destroy() {} };
-  } else if (path === '/demos') {
-    current = demosPage();
-  } else if (path === '/glossary') {
-    current = { root: glossaryPage(), destroy() {} };
-  } else if (path === '/') {
-    current = { root: homePage(), destroy() {} };
-  } else {
-    current = {
-      root: h('div', { class: 'page' }, h('h1', {}, 'Page not found'), h('p', {}, 'Use the menu to go to a page.')),
-      destroy() {},
-    };
+  const route = parseRoute(location.hash);
+  let title = TITLES[route.page];
+  switch (route.page) {
+    case 'home':
+      current = homePage();
+      break;
+    case 'lecture': {
+      const n = Number(route.param);
+      current = lecturePage(n);
+      title = `Beat ${n}`;
+      break;
+    }
+    case 'hands-on':
+      current = handsOnPage(route.param);
+      break;
+    case 'demos':
+      current = demosPage();
+      break;
+    case 'glossary':
+      current = { root: glossaryPage(route.param), destroy() {} };
+      break;
+    default:
+      current = notFound();
   }
-  main!.replaceChildren(current.root);
-  document.title = `${titleFor(path)} - ARIMA Workshop Explorer`;
-  for (const link of document.querySelectorAll<HTMLAnchorElement>('nav a')) {
-    if (link.getAttribute('href') === `#${path}`) {
+  const page: Page = current;
+  main!.replaceChildren(page.root);
+  document.title = `${title} - ARIMA Workshop`;
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="Main"] a')) {
+    if (link.dataset.page === route.page) {
       link.setAttribute('aria-current', 'page');
     } else {
       link.removeAttribute('aria-current');
     }
   }
-  window.scrollTo(0, 0);
+  if (!(route.page === 'hands-on' && route.param) && !(route.page === 'glossary' && route.param)) {
+    window.scrollTo(0, 0);
+  }
+  main!.focus({ preventScroll: true });
 }
 
 window.addEventListener('hashchange', render);

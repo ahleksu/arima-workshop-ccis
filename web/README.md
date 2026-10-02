@@ -1,8 +1,22 @@
 # Web explorer
 
-A static site with a lecture summary and three interactive demos for the ARIMA workshop. It uses Vite, TypeScript, and Plotly (bundled, no CDN). It has no backend, no login, and no analytics.
+A static site for the ARIMA workshop. It has a Home page with the session plan, a Lecture page of seven beats, a Hands-on page for the three notebook blocks, three interactive demos, and a glossary. It uses Vite, TypeScript, Plotly, and the Barlow fonts (all bundled, no CDN). It has no backend, no login, and no analytics. It is light mode only.
 
 All commands run in the `web/` folder. You need Node.js 20 or later.
+
+## Pages
+
+| Route | Page |
+| --- | --- |
+| `#/` | The session plan: two lines, twelve stops |
+| `#/lecture/1` to `#/lecture/7` | One lecture beat each. Use the left and right arrow keys. |
+| `#/hands-on` | Setup and blocks A, B, and C, with Colab links and check questions. `#/hands-on/b` jumps to block B. |
+| `#/demos` | The three demos |
+| `#/glossary` | The glossary. `#/glossary/adf-test` jumps to a term. |
+
+The session clock in the header counts up from the start of the hour and marks the current stop. It keeps its time in local storage, so a reload does not reset it.
+
+The plan, the beats, and the blocks are in `src/content.ts`. The colors and type are tokens at the top of `src/style.css`. `DESIGN.md` at the repository root records the design system.
 
 ## Install
 

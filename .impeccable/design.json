@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T03:08:03.133653+00:00",
+  "title": "Design System: ARIMA Workshop",
+  "extensions": {
+    "colorMeta": {
+      "lecture-blue": {
+        "role": "primary",
+        "displayName": "Lecture Blue",
+        "canonical": "#1257d6",
+        "tonalRamp": [
+          "#061e4c",
+          "#11357a",
+          "#1e4faa",
+          "#2c69de",
+          "#4989ff",
+          "#75acff",
+          "#a1ceff",
+          "#cdf0ff"
+        ]
+      },
+      "handson-orange": {
+        "role": "secondary",
+        "displayName": "Hands-on Orange",
+        "canonical": "#e4570f",
+        "tonalRamp": [
+          "#400e00",
+          "#681e00",
+          "#932f00",
+          "#c04200",
+          "#e3622b",
+          "#f98c63",
+          "#ffb593",
+          "#ffddc4"
+        ]
+      },
+      "demos-green": {
+        "role": "tertiary",
+        "displayName": "Demos Green",
+        "canonical": "#0c7a4b",
+        "tonalRamp": [
+          "#062918",
+          "#12452c",
+          "#1f6441",
+          "#2e8458",
+          "#4fa375",
+          "#7dbf98",
+          "#a8dcbc",
+          "#d3fae1"
+        ]
+      },
+      "reference-plum": {
+        "role": "tertiary",
+        "displayName": "Reference Plum",
+        "canonical": "#7a2d8e",
+        "tonalRamp": [
+          "#301437",
+          "#50275b",
+          "#723b81",
+          "#9650a9",
+          "#b56ec9",
+          "#cf94e0",
+          "#eabaf7",
+          "#ffe0ff"
+        ]
+      },
+      "platform-ground": {
+        "role": "neutral",
+        "displayName": "Platform Ground",
+        "canonical": "#eef1f4",
+        "tonalRamp": [
+          "#202224",
+          "#383b3d",
+          "#535658",
+          "#6f7274",
+          "#8d8f92",
+          "#abaeb1",
+          "#cbced1",
+          "#eceff2"
+        ]
+      },
+      "enamel-white": {
+        "role": "neutral",
+        "displayName": "Enamel White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#222222",
+          "#3a3a3a",
+          "#555555",
+          "#717171",
+          "#8f8f8f",
+          "#aeaeae",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "signal-ink": {
+        "role": "neutral",
+        "displayName": "Signal Ink",
+        "canonical": "#10151b",
+        "tonalRamp": [
+          "#1d2229",
+          "#353b42",
+          "#50565d",
+          "#6c727a",
+          "#899098",
+          "#a8afb7",
+          "#c7ced7",
+          "#e8eff8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "sign": {
+        "displayName": "Sign",
+        "purpose": "Page titles and station names."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "The one sentence of each lecture beat."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, minutes, buttons."
+      }
+    },
+    "shadows": [
+      {
+        "name": "you-are-here",
+        "value": "0 0 0 5px #ffffff, 0 0 0 8px var(--line)",
+        "purpose": "Double ring around the current stop."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "The arrival of the current stop and the rise of the statement."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stage",
+        "value": "62rem"
+      },
+      {
+        "name": "phone",
+        "value": "30rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Lecture Button",
+      "kind": "button",
+      "refersTo": "button-lecture",
+      "description": "Primary action on the lecture line.",
+      "html": "<a class=\"ds-btn-lecture\" href=\"#\">Start the lecture</a>",
+      "css": ".ds-btn-lecture{display:inline-flex;align-items:center;min-height:52px;padding:10px 22px;font:700 1.2rem 'Barlow Semi Condensed',Arial,sans-serif;color:#fff;background:#1257d6;border:2px solid transparent;border-radius:12px;text-decoration:none}.ds-btn-lecture:hover{background:#0d44b0}.ds-btn-lecture:focus-visible{outline:3px solid #10151b;outline-offset:3px}"
+    },
+    {
+      "name": "Hands-on Button",
+      "kind": "button",
+      "refersTo": "button-handson",
+      "description": "Opens a notebook in Colab.",
+      "html": "<a class=\"ds-btn-handson\" href=\"#\">Open in Colab</a>",
+      "css": ".ds-btn-handson{display:inline-flex;align-items:center;min-height:52px;padding:10px 22px;font:700 1.2rem 'Barlow Semi Condensed',Arial,sans-serif;color:#10151b;background:#e4570f;border:2px solid transparent;border-radius:12px;text-decoration:none}.ds-btn-handson:hover{background:#f06a22}.ds-btn-handson:focus-visible{outline:3px solid #10151b;outline-offset:3px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary action.",
+      "html": "<a class=\"ds-btn-quiet\" href=\"#\">See the hands-on plan</a>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;min-height:52px;padding:10px 22px;font:700 1.2rem 'Barlow Semi Condensed',Arial,sans-serif;color:#10151b;background:#fff;border:2px solid #6b7683;border-radius:12px;text-decoration:none}.ds-btn-quiet:hover{border-color:#10151b}.ds-btn-quiet:focus-visible{outline:3px solid #10151b;outline-offset:3px}"
+    },
+    {
+      "name": "Time Chip",
+      "kind": "chip",
+      "refersTo": "chip-time",
+      "description": "Minutes for a stop.",
+      "html": "<span class=\"ds-chip\">5 to 9 min</span>",
+      "css": ".ds-chip{display:inline-block;padding:2px 14px;font:600 1.05rem 'Barlow Semi Condensed',Arial,sans-serif;font-variant-numeric:tabular-nums;color:#10151b;background:#fff;border:2px solid #1257d6;border-radius:999px}"
+    },
+    {
+      "name": "Term Pill",
+      "kind": "chip",
+      "refersTo": "term-pill",
+      "description": "Link to a glossary term.",
+      "html": "<a class=\"ds-term\" href=\"#\">ADF test</a>",
+      "css": ".ds-term{display:inline-block;padding:2px 14px;font:700 1.05rem 'Barlow Semi Condensed',Arial,sans-serif;color:#7a2d8e;text-decoration:none;background:#fff;border:2px solid #7a2d8e;border-radius:999px}.ds-term:hover{color:#fff;background:#7a2d8e}"
+    },
+    {
+      "name": "Ask Box",
+      "kind": "card",
+      "refersTo": "",
+      "description": "Question for the room with a hidden answer.",
+      "html": "<section class=\"ds-ask\"><h2>Ask the room</h2><p>Which memory is it?</p></section>",
+      "css": ".ds-ask{padding:16px 20px 18px;background:#fff;border:2px solid #1257d6;border-radius:12px;max-width:26rem}.ds-ask h2{margin:0 0 6px;font:700 1.15rem 'Barlow Semi Condensed',Arial,sans-serif;color:#1257d6}.ds-ask p{margin:0;font:700 1.45rem/1.25 'Barlow Semi Condensed',Arial,sans-serif;color:#10151b}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Line Map",
+    "overview": "The hour is a journey on two lines. The Lecture line has seven stops. The Hands-on line has five. They meet at one interchange at minute 20. Every screen is a station sign: white enamel on a pale platform, near-black ink, a thick colored line, round stops.",
+    "keyCharacteristics": [
+      "Four line colors with fixed meaning.",
+      "One type family in two widths.",
+      "Round stops on a thick line.",
+      "Hairline rules, small radii, no shadows at rest.",
+      "One authored motion."
+    ],
+    "rules": [
+      {
+        "name": "The One Line, One Meaning Rule",
+        "body": "A line color names exactly one part of the hour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never Color Alone Rule",
+        "body": "Every state that color carries also has a word or a shape.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plain Number Rule",
+        "body": "Numbers in running text use the plain zero of Barlow.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sign Rule",
+        "body": "Panels have a 1px rule or a 2px colored border, never both a border and a soft shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use a line color for one meaning only.",
+      "Do keep one idea per lecture screen.",
+      "Do label illustrative data as synthetic.",
+      "Do keep contrast at 4.5:1 or better for body text.",
+      "Do keep all pages light."
+    ],
+    "donts": [
+      "Do not add dark mode.",
+      "Do not put a kicker above a heading.",
+      "Do not use a colored side stripe thicker than 1px.",
+      "Do not use a gradient, glass, or soft shadow on a sign.",
+      "Do not stand glyphs or emoji in for icons."
+    ]
+  }
+}

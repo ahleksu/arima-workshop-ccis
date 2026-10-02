@@ -1,54 +1,68 @@
-import { REPO_URL } from '../content';
-import { h } from '../ui';
+import { REPO_URL, STOPS } from '../content';
+import { GLOSSARY } from '../lib/glossary';
+import { homeMap } from '../map';
+import { getLastBeat } from '../resume';
+import { externalLink, h, icon } from '../ui';
+import type { Page } from './page';
 
-export function homePage(): HTMLElement {
-  return h(
+export function homePage(): Page {
+  const last = getLastBeat();
+  const flagged = last === null ? null : (STOPS.find((x) => x.id === `beat-${last}`)?.id ?? null);
+  const map = homeMap(flagged);
+  const root = h(
     'div',
-    { class: 'page' },
-    h('h1', {}, 'ARIMA Workshop Explorer'),
+    { class: 'page page-home' },
     h(
-      'p',
-      { class: 'lead' },
-      'This site goes with the ARIMA workshop for CCIS faculty on October 2, 2026. You can read a short summary of each lecture module and try three interactive demos. Everything runs in your browser.',
-    ),
-    h(
-      'div',
-      { class: 'cards' },
+      'section',
+      { class: 'intro' },
+      h('h1', { class: 'sign sign-hero' }, 'Forecast one series with ARIMA'),
+      h('p', { class: 'when' }, 'CCIS faculty workshop. Oct 2, 2026, 3 to 4 PM.'),
       h(
-        'a',
-        { class: 'card', href: '#/lecture' },
-        h('h2', {}, 'Lecture'),
-        h('p', {}, 'Five modules from the course outline. Each one has a plain summary and a link to the matching notebook.'),
+        'p',
+        { class: 'lead' },
+        'You get 20 minutes of ideas, then 40 minutes of code in Google Colab. You leave able to fit, check, and forecast one series.',
       ),
       h(
-        'a',
-        { class: 'card', href: '#/demos' },
-        h('h2', {}, 'Demos'),
-        h('p', {}, 'A stationarity demo, an AR and MA simulator with ACF and PACF, and an ARIMA forecast playground.'),
+        'p',
+        { class: 'actions' },
+        h('a', { class: 'btn btn-lecture', href: '#/lecture/1' }, 'Start the lecture', icon('arrow-right')),
+        h('a', { class: 'btn btn-quiet', href: '#/hands-on' }, 'See the hands-on plan'),
+        last !== null && last > 1 ? h('a', { class: 'btn btn-quiet', href: `#/lecture/${last}` }, icon('flag'), `Resume at beat ${last}`) : '',
+      ),
+    ),
+    map.root,
+    h(
+      'section',
+      { class: 'also' },
+      h('h2', {}, 'Always open'),
+      h(
+        'ul',
+        { class: 'also-list' },
+        h(
+          'li',
+          { class: 'also-demos' },
+          h('a', { href: '#/demos' }, 'Demos'),
+          h('span', {}, ' Three tools that run in your browser: stationarity, AR and MA, and an ARIMA playground.'),
+        ),
+        h(
+          'li',
+          { class: 'also-reference' },
+          h('a', { href: '#/glossary' }, 'Glossary'),
+          h('span', {}, ` ${GLOSSARY.terms.length} terms in plain words, with search.`),
+        ),
       ),
     ),
     h(
       'section',
-      {},
-      h('h2', {}, 'How to use this site'),
-      h(
-        'ol',
-        {},
-        h('li', {}, 'Read the Lecture page to follow the workshop.'),
-        h('li', {}, 'Open a notebook in Google Colab to run the code.'),
-        h('li', {}, 'Use the Demos page to build intuition before you fit a model.'),
-      ),
-    ),
-    h(
-      'section',
-      {},
+      { class: 'about' },
       h('h2', {}, 'About the data'),
       h(
         'p',
         {},
         'The demo series is synthetic. A script in the repository makes it from a known recipe. It holds no personal data. The page loads its own bundled files and calls no other service.',
       ),
-      h('p', {}, 'The code and the notebooks are in the ', h('a', { href: REPO_URL, rel: 'noopener noreferrer' }, 'project repository on GitHub'), '.'),
+      h('p', {}, 'The code and the notebooks are in the ', externalLink(REPO_URL, 'project repository on GitHub'), '.'),
     ),
   );
+  return { root, destroy: map.destroy };
 }

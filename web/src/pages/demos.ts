@@ -4,11 +4,9 @@ import { mountStationarity } from '../demos/stationarity';
 import type { Demo } from '../demos/types';
 import { loadSeries } from '../lib/series';
 import { h } from '../ui';
+import type { Page } from './page';
 
-export interface Page {
-  root: HTMLElement;
-  destroy(): void;
-}
+export type { Page } from './page';
 
 export function demosPage(): Page {
   const mounted: Demo[] = [];
@@ -31,8 +29,8 @@ export function demosPage(): Page {
   const root = h(
     'div',
     { class: 'page' },
-    h('h1', {}, 'Demos'),
-    h('p', { class: 'lead' }, 'Each demo updates as you move a control. Below each chart you can read a text summary of what the chart shows.'),
+    h('h1', { class: 'sign sign-demos' }, 'Demos'),
+    h('p', { class: 'lead' }, 'Three tools that run in your browser. Move a control and the chart updates. Below each chart you can read a text summary of what it shows.'),
     stationarity.root,
     armaSim.root,
     arimaSlot,

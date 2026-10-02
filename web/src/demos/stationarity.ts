@@ -1,7 +1,7 @@
 import { ADF_CRITICAL, adfStatistic, adfVerdict } from '../lib/adf';
 import { makeNormal, parseSeed } from '../lib/prng';
 import { diffLag, mean, sd } from '../lib/stats';
-import { onThemeChange, drawPlot, purgePlot, seriesColors } from '../plot';
+import { drawPlot, purgePlot, seriesColors } from '../plot';
 import { chartBlock, checkbox, h, slider, textInput } from '../ui';
 import type { Demo } from './types';
 
@@ -92,11 +92,9 @@ export function mountStationarity(): Demo {
   );
 
   update();
-  const stopTheme = onThemeChange(update);
   return {
     root,
     destroy() {
-      stopTheme();
       purgePlot(chart.plot);
     },
   };

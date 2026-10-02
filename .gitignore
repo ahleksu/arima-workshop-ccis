@@ -46,3 +46,8 @@ notebooks/outputs/
 
 # Local agent worktrees
 .claude/worktrees/
+
+# Design tool output (screenshots and build state)
+.impeccable/review/
+.impeccable/build/
+.impeccable/mocks/

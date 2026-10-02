@@ -85,6 +85,7 @@ Missing local data file. On Colab, the notebook has no local copy of the CSV, so
 | PRD-FR-009 | The repository provides a dissertation playbook and a data-fit checklist. | Faculty apply ARIMA in research. | Both documents exist and are linked from `README.md`. |
 | PRD-FR-010 | The repository provides a pricing plan document with future tiers and no implemented billing. | Records the monetization idea without scope risk. | `docs/pricing-plan.md` exists and the app has no payment code. |
 | PRD-FR-011 | A packaging script builds `arima-workshop-ccis-<version>.zip` for Google Drive. | Distribution outside GitHub. | The zip contains the files that the script lists and excludes `.venv` and `node_modules`. |
+| PRD-FR-012 | The web explorer has a Home page with the session plan, a Lecture page of seven beats, a Hands-on page with three notebook blocks, the demos, and the glossary. The lecture works with the arrow keys. A session clock marks the current stop. | The presenter teaches 20 minutes from the site, and the room follows 40 minutes of hands-on. | The lecture moves with the arrow keys. Each stop of the plan links to its beat or block. The plan adds up to 60 minutes. |
 | PRD-FR-013 | A script builds an `export/` folder with the notebooks, data, slides, and guides for upload to Google Drive. | Attendees open the notebooks from a Drive folder on Colab free tier. | `scripts/make_export.sh` lists the files, and notebook `03` runs from `export/notebooks`. |
 
 ## Non-Functional Requirements
@@ -94,7 +95,7 @@ Missing local data file. On Colab, the notebook has no local copy of the CSV, so
 | PRD-NFR-001 | Offline use | After setup, the notebooks and the built web app need no network. | Disconnect the network and run notebooks `01`, `03`, and `05`. |
 | PRD-NFR-002 | Time | The setup scripts finish on a typical laptop in under 10 minutes on a normal connection. | Time one run on a fresh environment. |
 | PRD-NFR-003 | Reproducibility | Notebooks produce the same results on each run. | Fixed random seeds. Repeated runs match. |
-| PRD-NFR-004 | Accessibility | Web explorer text has readable contrast and every chart has a text summary. | Manual check and Playwright accessibility snapshot. |
+| PRD-NFR-004 | Accessibility | Web explorer text has readable contrast (WCAG AA), every chart has a text summary, focus is visible, and the site is light mode only. | Contrast computation, manual check, and Playwright accessibility snapshot. |
 | PRD-NFR-005 | Portability | The web explorer works on current Chrome, Firefox, Safari, and Edge, and on a phone screen. | Manual check on two browsers and one phone width. |
 | PRD-NFR-006 | Privacy | The repository holds no personal data. | Review of `data/README.md` and a scan of the repository before each release. |
 | PRD-NFR-007 | Language | Documents use plain English and American spelling. | Review against the voice rules before release. |

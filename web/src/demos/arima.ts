@@ -1,6 +1,6 @@
 import { fitArima, forecastArima, type ArimaFit } from '../lib/arima';
 import { addDays, type WeeklySeries } from '../lib/series';
-import { drawPlot, onThemeChange, purgePlot, seriesColors } from '../plot';
+import { drawPlot, purgePlot, seriesColors } from '../plot';
 import { chartBlock, h, select, slider } from '../ui';
 import type { Demo } from './types';
 
@@ -109,11 +109,9 @@ export function mountArima(series: WeeklySeries): Demo {
   );
 
   update();
-  const stopTheme = onThemeChange(update);
   return {
     root,
     destroy() {
-      stopTheme();
       purgePlot(chart.plot);
     },
   };
