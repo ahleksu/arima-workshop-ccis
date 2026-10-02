@@ -32,6 +32,16 @@ To regenerate only the weekly series:
 npm run export-series
 ```
 
+## Glossary
+
+The terms are in `src/glossary.json`. The Glossary page reads that file. To rebuild `../docs/glossary.md` after you edit it, run:
+
+```
+npm run export-glossary
+```
+
+`npm test` fails if `docs/glossary.md` is out of date.
+
 ## Preview the built site
 
 ```

@@ -352,3 +352,39 @@ h2 {
 .site-footer p {
   margin: 0;
 }
+
+.glossary dt {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent);
+  scroll-margin-top: 16px;
+}
+
+.glossary dt .full {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.glossary dd {
+  margin: 4px 0 0;
+  max-width: 46rem;
+}
+
+.glossary .see {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+#glossary-search {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  margin: 6px 0 12px;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}

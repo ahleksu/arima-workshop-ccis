@@ -76,6 +76,8 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | SEC-REQ-002 | TC-013 | Partial (pattern scan only) |
 | SEC-REQ-003 | TC-003 | Pass |
 | SEC-REQ-004 | TC-019 | Pass |
+| TC-020 | Verify that every notebook runs on the newest libraries with no local data folder, as in a fresh Colab session | Python 3.12, internet access | 1. Make a venv and install the newest statsmodels, pandas, numpy, scipy, matplotlib with no version pins<br>2. Copy only the notebooks to an empty folder<br>3. Run `jupyter nbconvert --to notebook --execute` on `00` to `06` | 1. Each command exits with code 0<br>2. The data downloads from GitHub | Notebooks only | 2026-10-02 | Conditional Pass | pandas 3.0.6, numpy 2.5.3, statsmodels 0.15.0, scipy 1.18.1, matplotlib 3.11.2, Python 3.12: 7 of 7, 0 errors. Run time on a 14-core laptop: about 3 s for `00` to `03` and `06`, 20 s for `04`, 113 s for `05`. Peak memory: 223 to 275 MB, and 765 MB for `04`. This is a simulation. It does not run on Colab itself, which has 2 CPUs and needs a Google sign-in |
+| TC-021 | Verify that `scripts/make_export.sh` builds an upload folder that works without internet | Clean working tree | 1. Run the script<br>2. List `export/`<br>3. Run notebook `03` from `export/notebooks` with outbound network blocked<br>4. Run the script on a dirty tree | 1. Folder created<br>2. Notebooks, data, slides, guides, and `START_HERE.md` present<br>3. Run completes with 0 errors<br>4. Script refuses with exit 1 | Repository | 2026-10-02 | Pass | 17 files, 3.2 MB. Notebook `03` ran from the export folder with the network blocked: 0 errors. A stray file made the script exit 1 with a clear message. `shellcheck` clean. Upload to Drive is a manual step and is not done |
 | SEC-REQ-005 | TC-015 | Pass |
 | SEC-REQ-006 | TC-017 | Partial (hash printed, Drive sharing not done) |
 
@@ -105,7 +107,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 
 ## Execution Summary
 
-Executed: 16. Passed: 14. Failed: 0. Conditional Pass: 2 (TC-008, TC-013). Blocked: 0. Pending: 3 (TC-004 and TC-005 need a Windows machine, TC-010 needs the presenter for a timed dry run).
+Executed: 18. Passed: 15. Failed: 0. Conditional Pass: 3 (TC-008, TC-013, TC-020). Blocked: 0. Pending: 3 (TC-004 and TC-005 need a Windows machine, TC-010 needs the presenter for a timed dry run).
 
 ## Known Coverage Exclusions
 

@@ -10,6 +10,7 @@
   },
   "scripts": {
     "export-series": "node scripts/export-series.mjs",
+    "export-glossary": "node scripts/export-glossary.mjs",
     "predev": "node scripts/export-series.mjs",
     "dev": "vite",
     "prebuild": "node scripts/export-series.mjs",
