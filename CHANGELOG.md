@@ -8,6 +8,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Added
 
+- Script `scripts/make_export.sh` that builds an `export/` folder for Google Drive, and a Drive guide with Colab free tier limits (#29)
 - Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
 - Seven pre-executed notebooks for Colab and local use: setup check, stationarity, AR and MA, ARIMA, SARIMA with exogenous variables, forecast validation, and a template for your own data (#2, #3, #4, #5, #6, #7, #8)
 - Packaging script that builds a zip of the committed files and prints its SHA-256 hash (#15)
@@ -18,6 +19,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Changed
 
+- Notebooks ask for the data file when the GitHub download fails on Colab, and also look in the notebook's own folder (#29)
 ### Deprecated
 
 ### Removed
