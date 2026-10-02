@@ -13,7 +13,7 @@ This folder holds everything you need for the ARIMA workshop. You run the notebo
 ## Open a notebook in Colab
 
 1. Upload this whole folder to Google Drive.
-2. In Drive, open `notebooks` and right-click `01_fundamentals_stationarity.ipynb`.
+2. In Drive, open `notebooks` and right-click `03_arima_energy_demand.ipynb`.
 3. Choose Open with, then Google Colaboratory.
 4. If Google Colaboratory is not in the list, choose Connect more apps. Search for Colaboratory and install it.
 5. In Colab, choose Runtime, then Run all.
@@ -28,13 +28,13 @@ If the download fails, Colab shows a file picker. Choose `data/energy_demand_dai
 
 ## The path for the session
 
-You run three notebooks, in this order:
+You run one notebook, `03_arima_energy_demand.ipynb`, in three steps:
 
-1. `01_fundamentals_stationarity.ipynb`
-2. `02_ar_ma_acf_pacf.ipynb`
-3. `03_arima_energy_demand.ipynb`
+1. Prepare the series (sections 1 and 2).
+2. Choose and fit (sections 3, 4, and 5).
+3. Check and forecast (sections 7 and 8).
 
-Notebooks `04`, `05`, and `06` are for after the session. Notebook `06` is a template for your own data.
+Notebooks `01` and `02` give background on stationarity, AR and MA, and the ACF and PACF. Read them before or after the session. Notebooks `04`, `05`, and `06` are for after the session. Notebook `06` is a template for your own data.
 
 ## Free tier limits
 
@@ -48,7 +48,7 @@ We ran every notebook on a laptop with the newest pandas, numpy, and statsmodels
 | `04` | about 20 seconds | under 800 MB |
 | `05` | about 2 minutes | under 600 MB |
 
-We have not timed a run on Colab itself. Open and run notebooks `01` and `03` on Colab once before the session.
+We have not timed a run on Colab itself. Open and run notebook `03` on Colab once before the session.
 
 ## If something goes wrong
 

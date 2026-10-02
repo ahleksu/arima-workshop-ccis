@@ -65,7 +65,7 @@ The project has no roles. Repository write access belongs to the maintainer only
 
 ## Input and Output Security
 
-The web app has slider and text inputs. It validates number ranges and renders user text with `textContent`. The app stores the session clock and the last lecture beat in local storage. It reads them back as numbers and ignores any other value. Notebooks read only files from `data/`. Error messages in scripts show step names and package names, never environment variable values.
+The web app has slider and text inputs. It validates number ranges and renders user text with `textContent`. The app stores the session clock and the last lecture chapter in local storage. It reads them back as numbers and ignores any other value. Notebooks read only files from `data/`. Error messages in scripts show step names and package names, never environment variable values.
 
 ## Secrets and Configuration
 

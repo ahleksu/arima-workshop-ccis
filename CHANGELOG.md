@@ -8,6 +8,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Added
 
+- Home map marker that travels along the stops, rests at the current stop while the session clock runs, and does not loop when the reader turns on reduced motion (#35)
 - Redesigned web explorer: a session plan drawn as two lines, a Lecture page of seven beats with arrow-key control, a Hands-on page with Colab links and check questions, and a session clock (#31)
 - Lecture guide that explains each concept in plain words, with a script, a question for the room, and a trap to avoid for each beat (#30)
 - Script `scripts/make_export.sh` that builds an `export/` folder for Google Drive, and a Drive guide with Colab free tier limits (#29)
@@ -22,12 +23,17 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Changed
 
+- The session is now four lecture chapters (Intro, What is ARIMA, Requirements, and Fitting) in 20 minutes, and one hands-on notebook, `03`, in 40 minutes with a recap. Notebooks `01` and `02` are background and take-home. The agenda, lecture guide, Drive guide, slides, and test cases follow it (#35)
+- The web explorer uses the full screen width and the Home page has a new layout. Lecture pages no longer show minute chips or the arrow-key hint, and the answer box is titled Question (#35)
 - The web explorer is light mode only and uses the bundled Barlow fonts (#31)
 - Session plan is now 20 minutes of lecture in seven beats and 40 minutes of hands-on on notebooks 01, 02, and 03. The agenda and slides follow it (#30)
 - Notebooks ask for the data file when the GitHub download fails on Colab, and also look in the notebook's own folder (#29)
+
 ### Deprecated
 
 ### Removed
+
+- Web explorer routes `#/lecture/5` to `#/lecture/7` and `#/hands-on/a`, `b`, `c`, and `wrap`. The Hands-on page now uses `setup`, `prepare`, `fit`, `forecast`, and `recap` (#35)
 
 ### Fixed
 

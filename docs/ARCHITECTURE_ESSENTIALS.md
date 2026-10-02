@@ -27,7 +27,7 @@ The system delivers a 60-minute ARIMA forecasting workshop for CCIS faculty. It 
 - No component calls a network service at runtime.
 - Notebooks depend only on `data/` and `requirements.txt`.
 - The web app depends only on its own bundled files, including its fonts.
-- The web app keeps two values in the browser's local storage: the session clock and the last lecture beat. Neither is personal data, and the app works when storage is blocked.
+- The web app keeps two values in the browser's local storage: the session clock and the last lecture chapter. Neither is personal data, and the app works when storage is blocked.
 - Pricing exists only as `docs/pricing-plan.md`.
 - Setup scripts prefer Python 3.10 to 3.13 and must exit non-zero with a clear message on failure.
 

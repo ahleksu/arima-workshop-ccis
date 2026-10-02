@@ -27,7 +27,7 @@ CCIS faculty know Python and statistics, but many have not applied ARIMA to a re
 
 ## Goals
 
-1. A 60-minute agenda with a 20 minute lecture (seven beats) and a 40 minute hands-on (three notebook blocks and a wrap-up) that the presenter completes in one dry run within 60 minutes.
+1. A 60-minute agenda with a 20 minute lecture (four chapters: Intro, What is ARIMA, Requirements, and Fitting) and a 40 minute hands-on (setup, three steps in notebook `03`, and a recap) that the presenter completes in one dry run within 60 minutes.
 2. Seven notebooks (`00` to `06`) that run top to bottom with zero errors on Google Colab and on a local install.
 3. Setup scripts that create a working environment on macOS, Linux, and Windows, and `check_env.py` that passes on a fresh install.
 4. A web explorer with at least two interactive demos, deployed on GitHub Pages.
@@ -74,7 +74,7 @@ Missing local data file. On Colab, the notebook has no local copy of the CSV, so
 
 | ID | Requirement | Rationale | Acceptance outcomes |
 | --- | --- | --- | --- |
-| PRD-FR-001 | The repository provides a timed 60-minute agenda in `docs/agenda.md` and in the slides. The agenda has a 20 minute lecture and a 40 minute hands-on, and `docs/lecture-guide.md` explains each lecture beat. | The session has a fixed hour. | Segment times add up to 60 minutes. |
+| PRD-FR-001 | The repository provides a timed 60-minute agenda in `docs/agenda.md` and in the slides. The agenda has a 20 minute lecture and a 40 minute hands-on, and `docs/lecture-guide.md` explains each lecture chapter and gives notes for the three hands-on steps. | The session has a fixed hour. | Segment times add up to 60 minutes. |
 | PRD-FR-002 | The repository provides notebooks `00` to `06`. | Attendees practice each module. | Each notebook exists and runs with zero errors. |
 | PRD-FR-003 | Each notebook runs on Google Colab and on a local install. | Attendees use different machines. | Colab badge link opens the notebook. Local run passes `nbconvert --execute`. |
 | PRD-FR-004 | Setup scripts exist for macOS and Linux (`setup.sh`), PowerShell (`setup.ps1`), and cmd (`setup.bat`). | Attendees use different operating systems. | Each script creates `.venv`, installs dependencies, and prints the next command. |
@@ -85,7 +85,7 @@ Missing local data file. On Colab, the notebook has no local copy of the CSV, so
 | PRD-FR-009 | The repository provides a dissertation playbook and a data-fit checklist. | Faculty apply ARIMA in research. | Both documents exist and are linked from `README.md`. |
 | PRD-FR-010 | The repository provides a pricing plan document with future tiers and no implemented billing. | Records the monetization idea without scope risk. | `docs/pricing-plan.md` exists and the app has no payment code. |
 | PRD-FR-011 | A packaging script builds `arima-workshop-ccis-<version>.zip` for Google Drive. | Distribution outside GitHub. | The zip contains the files that the script lists and excludes `.venv` and `node_modules`. |
-| PRD-FR-012 | The web explorer has a Home page with the session plan, a Lecture page of seven beats, a Hands-on page with three notebook blocks, the demos, and the glossary. The lecture works with the arrow keys. A session clock marks the current stop. | The presenter teaches 20 minutes from the site, and the room follows 40 minutes of hands-on. | The lecture moves with the arrow keys. Each stop of the plan links to its beat or block. The plan adds up to 60 minutes. |
+| PRD-FR-012 | The web explorer has a Home page with the session plan, a Lecture page of four chapters, a Hands-on page with three steps in notebook `03`, the demos, and the glossary. The layout uses the full screen width and works on phones, tablets, and projectors. The lecture works with the arrow keys. A session clock marks the current stop. The Home map shows a marker that moves along the stops and stops moving when the reader turns on reduced motion. | The presenter teaches 20 minutes from the site, and the room follows 40 minutes of hands-on. | The lecture moves with the arrow keys. Each stop of the plan links to its chapter or step. The plan adds up to 60 minutes. Lecture pages show no minute chips. No page scrolls sideways at 375, 768, 1440, and 1920 px. |
 | PRD-FR-013 | A script builds an `export/` folder with the notebooks, data, slides, and guides for upload to Google Drive. | Attendees open the notebooks from a Drive folder on Colab free tier. | `scripts/make_export.sh` lists the files, and notebook `03` runs from `export/notebooks`. |
 
 ## Non-Functional Requirements

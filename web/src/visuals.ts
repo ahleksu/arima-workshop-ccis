@@ -1,9 +1,8 @@
-/** Drawings for the lecture beats. Plain SVG, drawn from the bundled weekly series or from fixed geometry. */
+/** Drawings for the lecture chapters. Plain SVG, drawn from the bundled weekly series or from fixed geometry. */
 import { loadSeries, type SeriesResult, type WeeklySeries } from './lib/series';
 import { h, s } from './ui';
 
 const HIDDEN_WEEKS = 26;
-const TREND_WINDOW = 52;
 
 let cached: Promise<SeriesResult> | null = null;
 function series(): Promise<SeriesResult> {
@@ -101,52 +100,6 @@ function drawQuestion(data: WeeklySeries): HTMLElement {
   );
 }
 
-function centeredAverage(values: readonly number[], window: number): (number | null)[] {
-  const half = window / 2;
-  return values.map((_, i) => {
-    if (i < half || i + half > values.length) return null;
-    let sum = 0;
-    for (let k = i - half; k < i + half; k += 1) sum += values[k];
-    return sum / window;
-  });
-}
-
-function drawParts(data: WeeklySeries): HTMLElement {
-  const W = 800;
-  const strip = 112;
-  const gap = 18;
-  const m: Box = { l: 12, r: 12, t: 22, b: 38 };
-  const H = m.t + strip * 3 + gap * 2 + m.b;
-  const n = data.values.length;
-  const trend = centeredAverage(data.values, TREND_WINDOW);
-  const rest = data.values.map((v, i) => (trend[i] === null ? null : v - (trend[i] as number)));
-  const x = scale([0, n - 1], [m.l, W - m.r]);
-  const svg = s('svg', { class: 'vis-svg', viewBox: `0 0 ${W} ${H}` });
-  const rows: { name: string; values: (number | null)[] }[] = [
-    { name: 'The series', values: data.values },
-    { name: 'Trend and yearly swing (52-week average)', values: trend },
-    { name: 'What is left (weekly season and noise)', values: rest },
-  ];
-  rows.forEach((row, k) => {
-    const top = m.t + k * (strip + gap);
-    const present = row.values.filter((v): v is number => v !== null);
-    const lo = Math.min(...present);
-    const hi = Math.max(...present);
-    const y = scale([lo - (hi - lo) * 0.08, hi + (hi - lo) * 0.08], [top + strip, top]);
-    svg.append(s('rect', { class: 'vis-strip', x: m.l, y: top, width: W - m.l - m.r, height: strip }));
-    svg.append(s('text', { class: 'vis-label', x: m.l + 10, y: top + 26 }, row.name));
-    svg.append(s('path', { class: k === 2 ? 'vis-line vis-line-2' : 'vis-line', d: pathFor(row.values, x, y) }));
-  });
-  for (const t of yearTicks(data.dates)) {
-    svg.append(s('text', { class: 'vis-tick', x: x(t.index), y: H - 8, 'text-anchor': 'middle' }, t.label));
-  }
-  return figure(
-    'The weekly series split into three rows: the series, its 52-week average, and what is left.',
-    'Weekly mean energy demand. The data are synthetic. The middle row is a centered 52-week average. The bottom row is the series minus that average.',
-    svg,
-  );
-}
-
 /** Mount an async figure. The caller gets a node now and the drawing fills it later. */
 function asyncFigure(draw: (data: WeeklySeries) => HTMLElement): { root: HTMLElement; destroy(): void } {
   const root = slot();
@@ -164,45 +117,3 @@ function asyncFigure(draw: (data: WeeklySeries) => HTMLElement): { root: HTMLEle
 }
 
 export const questionVisual = () => asyncFigure(drawQuestion);
-export const partsVisual = () => asyncFigure(drawParts);
-
-/** Four-part legend for beat 2. */
-export function partsLegend(): HTMLElement {
-  const items: [string, string][] = [
-    ['Trend', 'A slow rise or fall in the level.'],
-    ['Seasonality', 'A pattern that repeats at a fixed period, such as every 7 days.'],
-    ['Cycle', 'Long swings with no fixed period.'],
-    ['Noise', 'The part that nothing explains.'],
-  ];
-  return h('dl', { class: 'parts' }, ...items.flatMap(([term, text]) => [h('dt', {}, term), h('dd', {}, text)]));
-}
-
-/** The two ways to read a p-value, drawn to scale of meaning and not of size. */
-export function pvalueDiagram(): HTMLElement {
-  const W = 800;
-  const H = 286;
-  const x0 = 210;
-  const x1 = 780;
-  const cut = x0 + (x1 - x0) * 0.16;
-  const svg = s('svg', { class: 'vis-svg', viewBox: `0 0 ${W} ${H}` });
-  const rows = [
-    { y: 76, name: 'ADF test', left: 'Good: looks stationary', right: 'Unit root stays', leftGood: true },
-    { y: 188, name: 'Ljung-Box test', left: 'Bad: a pattern is left', right: 'Good: no pattern left', leftGood: false },
-  ];
-  for (const row of rows) {
-    svg.append(s('text', { class: 'vis-label vis-label-strong', x: 4, y: row.y + 7 }, row.name));
-    svg.append(s('rect', { class: row.leftGood ? 'zone-good' : 'zone-bad', x: x0, y: row.y - 22, width: cut - x0, height: 44 }));
-    svg.append(s('rect', { class: row.leftGood ? 'zone-neutral' : 'zone-good', x: cut, y: row.y - 22, width: x1 - cut, height: 44 }));
-    svg.append(s('text', { class: 'vis-zone', x: x0, y: row.y + 52 }, row.left));
-    svg.append(s('text', { class: 'vis-zone', x: x1, y: row.y + 52, 'text-anchor': 'end' }, row.right));
-    svg.append(s('line', { class: 'vis-cut', x1: cut, x2: cut, y1: row.y - 30, y2: row.y + 26 }));
-    svg.append(s('text', { class: 'vis-tick', x: cut, y: row.y - 36, 'text-anchor': 'middle' }, '0.05'));
-  }
-  svg.append(s('text', { class: 'vis-tick', x: x0, y: 280, 'text-anchor': 'start' }, 'p = 0'));
-  svg.append(s('text', { class: 'vis-tick', x: x1, y: 280, 'text-anchor': 'end' }, 'p = 1'));
-  return figure(
-    'Two scales of p-value from 0 to 1 with a cut at 0.05. For the ADF test a small p-value is good. For the Ljung-Box test a large p-value is good.',
-    'Read the p-value in the right direction. The scale is not drawn to size.',
-    svg,
-  );
-}
