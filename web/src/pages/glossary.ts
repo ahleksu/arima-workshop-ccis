@@ -1,9 +1,9 @@
 import { filterTerms, GLOSSARY, slug, sortTerms } from '../lib/glossary';
 import { h } from '../ui';
 
-export function glossaryPage(): HTMLElement {
+export function glossaryPage(focus: string | null = null): HTMLElement {
   if (GLOSSARY.schema_version !== 1) {
-    return h('div', { class: 'page' }, h('h1', {}, 'Glossary'), h('p', {}, 'The glossary data has an unknown version, so the page cannot show it.'));
+    return h('div', { class: 'page' }, h('h1', { class: 'sign sign-reference' }, 'Glossary'), h('p', {}, 'The glossary data has an unknown version, so the page cannot show it.'));
   }
   const terms = sortTerms(GLOSSARY.terms);
   const list = h('dl', { class: 'glossary' });
@@ -43,14 +43,22 @@ export function glossaryPage(): HTMLElement {
 
   input.addEventListener('input', render);
   render();
-  return h(
+  const page = h(
     'div',
     { class: 'page' },
-    h('h1', {}, 'Glossary'),
+    h('h1', { class: 'sign sign-reference' }, 'Glossary'),
     h('p', { class: 'lead' }, 'Plain definitions of the terms used in the workshop. The same list is in the repository as docs/glossary.md.'),
     h('label', { for: 'glossary-search' }, 'Search terms'),
     input,
     status,
     list,
   );
+  if (focus) {
+    queueMicrotask(() => {
+      const target = page.querySelector<HTMLElement>(`#term-${focus}`);
+      target?.scrollIntoView({ block: 'start' });
+      target?.focus({ preventScroll: true });
+    });
+  }
+  return page;
 }

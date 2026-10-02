@@ -148,3 +148,62 @@ export function chartBlock(title: string): ChartBlock {
     },
   };
 }
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+/** Create an SVG element. Numbers become strings. Text goes in through createTextNode. */
+export function s<K extends keyof SVGElementTagNameMap>(
+  tag: K,
+  attrs: Record<string, string | number | undefined> = {},
+  ...children: (Node | string)[]
+): SVGElementTagNameMap[K] {
+  const node = document.createElementNS(SVG_NS, tag);
+  for (const [name, value] of Object.entries(attrs)) {
+    if (value !== undefined) {
+      node.setAttribute(name, String(value));
+    }
+  }
+  for (const child of children) {
+    node.append(typeof child === 'string' ? document.createTextNode(child) : child);
+  }
+  return node;
+}
+
+export type IconName = 'arrow-left' | 'arrow-right' | 'external' | 'flag' | 'play' | 'pause' | 'reset' | 'eye';
+
+const ICON_PATHS: Record<IconName, string[]> = {
+  'arrow-left': ['M19 12H5', 'M11 6l-6 6 6 6'],
+  'arrow-right': ['M5 12h14', 'M13 6l6 6-6 6'],
+  external: ['M14 4h6v6', 'M20 4l-9 9', 'M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5'],
+  flag: ['M6 21V4', 'M6 4h11l-2.5 4L17 12H6'],
+  play: ['M8 5l11 7-11 7z'],
+  pause: ['M8 5v14', 'M16 5v14'],
+  reset: ['M4 12a8 8 0 1 0 3-6.2', 'M4 4v5h5'],
+  eye: ['M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'],
+};
+
+/** A drawn icon: one stroke weight, no fill, inherits the text color. */
+export function icon(name: IconName): SVGSVGElement {
+  const svg = s('svg', {
+    class: 'icon',
+    viewBox: '0 0 24 24',
+    width: 20,
+    height: 20,
+    fill: 'none',
+    stroke: 'currentColor',
+    'stroke-width': 2,
+    'stroke-linecap': 'round',
+    'stroke-linejoin': 'round',
+    'aria-hidden': 'true',
+    focusable: 'false',
+  });
+  for (const d of ICON_PATHS[name]) {
+    svg.append(s('path', { d }));
+  }
+  return svg;
+}
+
+/** A link that opens another site in a new tab. */
+export function externalLink(href: string, label: string, className = ''): HTMLAnchorElement {
+  return h('a', { href, class: className, target: '_blank', rel: 'noopener noreferrer' }, label, icon('external'));
+}

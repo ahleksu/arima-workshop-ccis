@@ -38,7 +38,7 @@
 | Modeling | `statsmodels`, `pandas`, `numpy`, `scipy`, `matplotlib` | Standard, documented, stable. | `prophet`, because it hides ARIMA concepts. |
 | Auto selection | `pmdarima` (optional) | Shows automated order search. | Required use, because install may fail on new Python versions. |
 | Notebook runtime | JupyterLab locally, Google Colab in the cloud | Both are free and familiar. | A hosted JupyterHub, because it needs a server. |
-| Web app | Vite, TypeScript, Plotly | Static build, fast to write, good charts. | Streamlit, because it needs a server during the session. Pyodide as default, because of the large download. |
+| Web app | Vite, TypeScript, Plotly, bundled Barlow fonts | Static build, fast to write, good charts. Fonts ship with the build, so the site makes no font request. | Streamlit, because it needs a server during the session. Pyodide as default, because of the large download. |
 | Hosting | GitHub Pages through GitHub Actions | Free, no server. | A paid host, because the project has no revenue. |
 | Distribution | GitHub repository and a Google Drive zip | Both channels were requested. | Email attachments, because of size limits. |
 

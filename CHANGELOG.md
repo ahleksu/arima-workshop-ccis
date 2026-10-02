@@ -8,6 +8,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Added
 
+- Redesigned web explorer: a session plan drawn as two lines, a Lecture page of seven beats with arrow-key control, a Hands-on page with Colab links and check questions, and a session clock (#31)
 - Glossary of 29 terms on a searchable Glossary page in the web explorer and in `docs/glossary.md`, both made from one data file (#27)
 - Synthetic daily energy demand dataset, its generator script, and `requirements.txt` (#1)
 - Seven pre-executed notebooks for Colab and local use: setup check, stationarity, AR and MA, ARIMA, SARIMA with exogenous variables, forecast validation, and a template for your own data (#2, #3, #4, #5, #6, #7, #8)
@@ -19,6 +20,7 @@ Public entries end with their originating Issue reference, for example `(#42)`. 
 
 ### Changed
 
+- The web explorer is light mode only and uses the bundled Barlow fonts (#31)
 ### Deprecated
 
 ### Removed

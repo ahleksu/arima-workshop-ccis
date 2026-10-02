@@ -76,6 +76,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 | SEC-REQ-002 | TC-013 | Partial (pattern scan only) |
 | SEC-REQ-003 | TC-003 | Pass |
 | SEC-REQ-004 | TC-019 | Pass |
+| TC-022 | Verify that the redesigned web explorer is light mode only, works with the keyboard, and fits phone, tablet, and projector widths | `npm run build` passed | 1. Run `npm test`<br>2. Open every route at 390, 768, and 1280 px<br>3. Press the left and right arrow keys on a lecture beat, and on a slider<br>4. Start, pause, and reset the clock<br>5. List the hosts of all loaded resources<br>6. Compute the contrast of the text and line colors | 1. All tests pass<br>2. No horizontal scroll<br>3. Beats change, and the slider keeps its keys<br>4. The current stop is marked<br>5. Only the site origin<br>6. Text at least 4.5:1 | Built site | 2026-10-02 | Conditional Pass | `npm test`: 35 of 35. `npm run build` passed. Chromium: 11 routes at 390 px and 9 routes at 768 px have no horizontal scroll. Arrow keys moved beats 3 to 4 and back, and the slider ignored them. The clock showed 0:01 and marked beat 1, and Reset cleared it. The page requested only its own origin, `color-scheme` is light, and the console had no errors. Contrast on white: ink 18.3, secondary text 9.6, blue 6.3, orange-brown text 5.8, green 5.4, plum 8.1. Orange fill with ink text: 4.95. The design detector found nothing. Only Chromium was tested, and no screen reader was tried |
 | SEC-REQ-005 | TC-015 | Pass |
 | SEC-REQ-006 | TC-017 | Partial (hash printed, Drive sharing not done) |
 
@@ -105,7 +106,7 @@ Tests use the public CSV files in `data/`. The XSS test uses a harmless string t
 
 ## Execution Summary
 
-Executed: 16. Passed: 14. Failed: 0. Conditional Pass: 2 (TC-008, TC-013). Blocked: 0. Pending: 3 (TC-004 and TC-005 need a Windows machine, TC-010 needs the presenter for a timed dry run).
+Executed: 17. Passed: 14. Failed: 0. Conditional Pass: 3 (TC-008, TC-013, TC-022). Blocked: 0. Pending: 3 (TC-004 and TC-005 need a Windows machine, TC-010 needs the presenter for a timed dry run).
 
 ## Known Coverage Exclusions
 

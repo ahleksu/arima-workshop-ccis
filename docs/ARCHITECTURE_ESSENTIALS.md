@@ -10,7 +10,7 @@ The system delivers a 60-minute ARIMA forecasting workshop for CCIS faculty. It 
 
 - Python 3.10 to 3.13: `statsmodels`, `pandas`, `numpy`, `scipy`, `matplotlib`, `jupyterlab`, optional `pmdarima`
 - Google Colab and local JupyterLab
-- Vite, TypeScript, Plotly for `web/`
+- Vite, TypeScript, Plotly for `web/`, with the Barlow fonts bundled from `@fontsource`
 - GitHub Pages through GitHub Actions
 - Google Drive zip for distribution
 
@@ -26,7 +26,8 @@ The system delivers a 60-minute ARIMA forecasting workshop for CCIS faculty. It 
 - No backend, no database, no login, and no payment code.
 - No component calls a network service at runtime.
 - Notebooks depend only on `data/` and `requirements.txt`.
-- The web app depends only on its own bundled files.
+- The web app depends only on its own bundled files, including its fonts.
+- The web app keeps two values in the browser's local storage: the session clock and the last lecture beat. Neither is personal data, and the app works when storage is blocked.
 - Pricing exists only as `docs/pricing-plan.md`.
 - Setup scripts prefer Python 3.10 to 3.13 and must exit non-zero with a clear message on failure.
 
