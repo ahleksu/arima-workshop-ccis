@@ -51,3 +51,6 @@ notebooks/outputs/
 .impeccable/review/
 .impeccable/build/
 .impeccable/mocks/
+
+# Generated export bundle
+export.zip
